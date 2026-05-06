@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collabs — EATURMOOD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1C1510;
+    --warm-brown: #3D2B1A;
+    --gold: #B8965A;
+    --gold-light: #D4B07A;
+    --muted: #8A7A6A;
+    --border: rgba(61, 43, 26, 0.15);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: var(--dark);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--dark); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 3rem 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.35s;
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--warm-brown);
+  }
+
+  .header-descriptor {
+    margin-top: 2rem;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .header-descriptor span {
+    display: inline-block;
+    padding: 0 1.5rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .header-descriptor span:first-child { padding-left: 0; }
+  .header-descriptor span:last-child { border-right: none; }
+
+  /* CASE STUDY SECTION */
+  .case-study-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem 6rem;
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.6s;
+  }
+
+  .case-study-left { position: sticky; top: 8rem; }
+
+  .case-study-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+  }
+
+  .image-credit {
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .case-study-right { padding-top: 0.5rem; }
+
+  .cs-number {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .cs-title {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3.5vw, 46px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+  }
+
+  .cs-title em { font-style: italic; }
+
+  .cs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 1.25rem 0 1.75rem;
+  }
+
+  .cs-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 0.5px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+  }
+
+  .cs-pull {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--warm-brown);
+    border-left: 1.5px solid var(--gold);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cs-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .cs-press {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(61, 43, 26, 0.05);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+
+  .cs-press-icon {
+    font-size: 18px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .cs-press-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .cs-press-text strong { color: var(--dark); font-weight: 500; }
+
+  .cs-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 2rem 0;
+  }
+
+  .cs-metric {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: 2px;
+    padding: 1.1rem 1rem;
+  }
+
+  .cs-metric-num {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--dark);
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .cs-metric-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cs-coda {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    padding-top: 1.75rem;
+    border-top: 0.5px solid var(--border);
+    margin-top: 1rem;
+    line-height: 1.7;
+  }
+
+  /* IMAGE GRID */
+  .grid-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem 8rem;
+  }
+
+  .grid-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .grid-header h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dark);
+  }
+
+  .grid-header span {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .masonry-grid {
+    columns: 3;
+    column-gap: 16px;
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .masonry-item img,
+  .masonry-item video {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+    border-radius: 2px;
+  }
+
+  .masonry-item:hover img,
+  .masonry-item:hover video {
+    transform: scale(1.03);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(245, 240, 232, 0.6);
+    padding: 4rem 3rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 0.5px solid rgba(245, 240, 232, 0.12);
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.9);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(245, 240, 232, 0.45);
+  }
+
+  .footer-col-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(245, 240, 232, 0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: rgba(245, 240, 232, 0.9); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(245, 240, 232, 0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 1.5rem 3rem; }
+    .case-study-section,
+    .grid-section { padding: 0 1.5rem 4rem; }
+    .case-study {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .case-study-left { position: static; }
+    .case-study-image { aspect-ratio: 16/9; }
+    .masonry-grid { columns: 2; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 3rem 1.5rem; }
+  }
+
+  @media (max-width: 540px) {
+    .masonry-grid { columns: 1; }
+    .cs-metrics { grid-template-columns: 1fr 1fr; }
+    .header-descriptor span { display: block; border-right: none; padding: 0.25rem 0; }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <p class="page-header-eyebrow">Recent work</p>
+  <h1>What I bring<br><em>to the table.</em></h1>
+  <p class="header-descriptor">
+    <span>Brand Thinker</span>
+    <span>Editorial Stylist</span>
+    <span>Creative Strategist</span>
+    <span>Campaign Developer</span>
+    <span>Table Turner</span>
+  </p>
+</header>
+
+<!-- CASE STUDIES -->
+<section class="case-study-section">
+  <hr class="section-rule">
+
+  <!-- 01 GRACE BLU -->
+  <div class="case-study">
+    <div class="case-study-left">
+      <img
+        class="case-study-image"
+        src="https://framerusercontent.com/images/BiKVXQzIXgjQLIGUujvr4LQ7f0Y.jpeg"
+        alt="Grace Blu — luxury bar interior, Newport Beach"
+        style="aspect-ratio: auto; width: 100%; object-fit: contain; background: #1a1008;"
+      >
+      <p class="image-credit">Design: Grace Blu &nbsp;·&nbsp; Photographer: Douglas Friedman</p>
+    </div>
+
+    <div class="case-study-right">
+      <span class="cs-number">01 — Grace Blu Interiors</span>
+
+      <h2 class="cs-title">The work was<br>world-class.<br><em>The world just<br>didn't know it yet.</em></h2>
+
+      <div class="cs-tags">
+        <span class="cs-tag">Creative Direction</span>
+        <span class="cs-tag">Campaign Styling</span>
+        <span class="cs-tag">Brand Refinement</span>
+        <span class="cs-tag">Photography Curation</span>
+        <span class="cs-tag">3 Years</span>
+      </div>
+
+      <p class="cs-pull">Grace Blu — a luxury interior design studio in Newport Beach — was producing spaces worthy of global recognition. The visual identity, the content, and the photography weren't yet telling that story.</p>
+
+      <p class="cs-body">Over three years, EatUrMood embedded into the brand to change that. We directed styling campaigns, elevated and curated the photographer roster, refined the brand package, and shaped the visual language from the inside out.</p>
+
+      <div class="cs-press">
+        <svg class="cs-press-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v8a2 2 0 0 1-2 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <p class="cs-press-text">The collaboration culminated in a feature in <strong>Architectural Digest Middle East,</strong> shot by <strong>Douglas Friedman</strong> — one of the most sought-after architectural photographers in the world.</p>
+      </div>
+
+      <div class="cs-metrics">
+        <div class="cs-metric">
+          <span class="cs-metric-num">11K→30K</span>
+          <span class="cs-metric-label">Instagram growth</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">2×</span>
+          <span class="cs-metric-label">Project volume</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">↑</span>
+          <span class="cs-metric-label">Average budgets increased</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">6→17</span>
+          <span class="cs-metric-label">Team expanded to meet demand</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIVIDER BETWEEN CASE STUDIES -->
+  <hr class="section-rule" style="margin: 2rem 0 5rem;">
+
+  <!-- 02 GIRL WITH THE GARDEN GATE -->
+  <div class="case-study reveal" style="animation: none;">
+    <div class="case-study-left">
+      <img
+        class="case-study-image"
+        src="YOUR_GARDEN_GATE_IMAGE_URL_HERE"
+        alt="Girl with the Garden Gate — brand activation campaign"
+        style="aspect-ratio: 4/3;"
+      >
+      <p class="image-credit">Brand Activation &nbsp;·&nbsp; EatUrMood</p>
+    </div>
+
+    <div class="case-study-right">
+      <span class="cs-number">02 — Girl with the Garden Gate</span>
+
+      <h2 class="cs-title"><em>Some brands<br>aren't built.</em><br>They're cultivated.</h2>
+
+      <div class="cs-tags">
+        <span class="cs-tag">Brand Activation</span>
+        <span class="cs-tag">Logo & Crest</span>
+        <span class="cs-tag">Visual Identity</span>
+        <span class="cs-tag">Storytelling</span>
+        <span class="cs-tag">Full Rebrand</span>
+      </div>
+
+      <p class="cs-pull">Girl with the Garden Gate is an exclusive horticulture service — one part botanical expertise, one part lifestyle aspiration. When they came to EatUrMood, they had something rare: a genuinely distinctive point of view. What they needed was a world to match it.</p>
+
+      <p class="cs-body">We built the brand from the ground up. A hand-crafted crest. A refined color language rooted in the garden itself. A logo with the weight of legacy and the softness of something that actually grows. A storytelling framework that positions the brand not as a service, but as an invitation into a very particular kind of life.</p>
+
+      <div class="cs-press">
+        <svg class="cs-press-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <p class="cs-press-text">A full brand activation — from identity to imagery — built to introduce a new kind of horticulture brand to the world. <strong>Launch forthcoming.</strong> The gate is about to open.</p>
+      </div>
+
+      <div class="cs-metrics">
+        <div class="cs-metric">
+          <span class="cs-metric-num">0→1</span>
+          <span class="cs-metric-label">Brand built from scratch</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">Full</span>
+          <span class="cs-metric-label">Crest, logo & identity</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">↑</span>
+          <span class="cs-metric-label">Storytelling framework</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-num">Soon</span>
+          <span class="cs-metric-label">Launch in progress</span>
+        </div>
+      </div>
+
+      <p class="cs-coda">The garden gate is open. The world is about to find out what's behind it.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- IMAGE GRID -->
+<section class="grid-section reveal">
+  <div class="grid-header">
+    <h2>More work</h2>
+    <span>Selected projects</span>
+  </div>
+
+  <div class="masonry-grid">
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/MYFgHCSazWb6KizfvR5HIWuQw.jpeg" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/joyDM4ESbz17zEuH0cDioJMVUE.jpeg" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <video autoplay muted loop playsinline>
+        <source src="https://framerusercontent.com/assets/KCZrKeEtCEr5wmyEoIbilpZFYA.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/BiKVXQzIXgjQLIGUujvr4LQ7f0Y.jpeg" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <video autoplay muted loop playsinline>
+        <source src="https://framerusercontent.com/assets/9C2IAQEwnrxfttbweTsXzj9IDw.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/AHrLYwZGRn6pdpplMPLGeyWT4.png" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <video autoplay muted loop playsinline>
+        <source src="https://framerusercontent.com/assets/XeH72VYoM48GpW927IsIFlXEg0.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/2tELap3xg2xtab3zLsqQQJgTeU.jpeg" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/Mbmxbtwf4v77duHHvMofGVFzE00.webp" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <video autoplay muted loop playsinline>
+        <source src="https://framerusercontent.com/assets/tSBfItHTMFDFhMixEPJ4uICmQ.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/TTchi11u6Clk2tu8R60i0f3vLqM.jpeg" alt="EatUrMood project">
+    </div>
+
+    <div class="masonry-item">
+      <img src="https://framerusercontent.com/images/gKzxZjA5gkFqx5nIC5emmmcc7w.jpeg" alt="EatUrMood project">
+    </div>
+
+  </div>
+</section>
+
+
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
