@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — EatUrMood</title>
+<meta name="description" content="Brand activation, creative direction, and visual storytelling for mood-driven brands. Services and rates from the studio EatUrMood, directed by Sallie Townsend.">
+<meta property="og:title" content="Services — EatUrMood">
+<meta property="og:description" content="Brand activation, creative direction, and visual storytelling. Turning ideas into brands people can see, feel, and remember.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1C1510;
+    --warm-brown: #3D2B1A;
+    --gold: #B8965A;
+    --gold-light: #D4B07A;
+    --muted: #8A7A6A;
+    --border: rgba(61, 43, 26, 0.15);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: var(--dark);
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 7rem 3rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+
+  .page-header-eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 6.5vw, 84px);
+    font-weight: 300; line-height: 1.05; color: var(--dark);
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.35s;
+  }
+  .page-header h1 em { font-style: italic; color: var(--warm-brown); }
+
+  .header-sub {
+    margin-top: 1.75rem;
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 300;
+    font-size: clamp(20px, 2.6vw, 30px);
+    line-height: 1.45; color: var(--muted);
+    max-width: 620px;
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .header-descriptor {
+    margin-top: 2rem; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.65s;
+  }
+  .header-descriptor span {
+    display: inline-block; padding: 0 1.5rem; border-right: 1px solid var(--border);
+  }
+  .header-descriptor span:first-child { padding-left: 0; }
+  .header-descriptor span:last-child { border-right: none; }
+
+  .section-rule { border: none; border-top: 0.5px solid var(--border); margin-bottom: 4rem; }
+
+  /* SECTION SHELL */
+  .section { max-width: 1200px; margin: 0 auto; padding: 0 3rem 6rem; }
+
+  .grid-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border);
+  }
+  .grid-header h2 {
+    font-family: var(--font-display); font-size: 28px; font-weight: 300;
+    font-style: italic; color: var(--dark);
+  }
+  .grid-header span {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .pillar-num {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; display: block;
+  }
+  .pillar h3 {
+    font-family: var(--font-display); font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 300; line-height: 1.15; color: var(--dark); margin-bottom: 0.85rem;
+  }
+  .pillar p {
+    font-size: 14.5px; font-weight: 300; line-height: 1.85; color: var(--muted);
+  }
+
+  /* RATES */
+  .rate-list { border-top: 0.5px solid var(--border); }
+  .rate-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem;
+    align-items: baseline; padding: 1.75rem 0;
+    border-bottom: 0.5px solid var(--border);
+    transition: padding-left 0.3s ease;
+  }
+  .rate-row:hover { padding-left: 0.5rem; }
+  .rate-name {
+    font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 400; color: var(--dark); margin-bottom: 0.4rem;
+  }
+  .rate-desc { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 560px; }
+  .rate-price {
+    font-family: var(--font-display); font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 300; color: var(--gold); white-space: nowrap; text-align: right;
+  }
+  .rate-price small {
+    display: block; font-family: var(--font-body); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+  }
+
+  /* STORY (dark) */
+  .story { background: var(--dark); color: rgba(245,240,232,0.9); padding: 6.5rem 3rem; }
+  .story-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .story-eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .story-title {
+    font-family: var(--font-display); font-weight: 300; font-style: italic;
+    font-size: clamp(34px, 5vw, 60px); line-height: 1.1;
+    color: rgba(245,240,232,0.96); margin-bottom: 2.5rem;
+  }
+  .story-body {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(18px, 2.2vw, 23px); line-height: 1.85;
+    color: rgba(245,240,232,0.7);
+  }
+  .story-body p { margin-bottom: 1.5rem; }
+  .story-body p:last-child { margin-bottom: 0; }
+  .story-body em { font-style: italic; color: var(--gold-light); }
+  .story-sign {
+    margin-top: 2.5rem; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(245,240,232,0.4);
+  }
+
+  /* CTA (cream) */
+  .cta { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; text-align: center; }
+  .cta-eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .cta-title {
+    font-family: var(--font-display); font-weight: 300; font-style: italic;
+    font-size: clamp(30px, 4vw, 50px); line-height: 1.12; color: var(--dark); margin-bottom: 1.75rem;
+  }
+  .cta-btn {
+    display: inline-block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dark); text-decoration: none; padding: 0.9rem 2.2rem;
+    border: 0.5px solid var(--warm-brown); border-radius: 999px; transition: all 0.25s ease;
+  }
+  .cta-btn:hover { background: var(--dark); color: var(--cream); }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(245, 240, 232, 0.6); padding: 4rem 3rem; }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid rgba(245, 240, 232, 0.12); margin-bottom: 2rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 22px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245, 240, 232, 0.9);
+    margin-bottom: 0.75rem; display: block; text-decoration: none;
+  }
+  .footer-tagline { font-size: 12px; line-height: 1.7; color: rgba(245, 240, 232, 0.45); }
+  .footer-col-title {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.25rem; display: block;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a {
+    font-size: 13px; color: rgba(245, 240, 232, 0.55); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: rgba(245, 240, 232, 0.9); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between;
+    align-items: center; font-size: 11px; color: rgba(245, 240, 232, 0.3); letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 1.5rem 2.5rem; }
+    .section { padding: 0 1.5rem 4rem; }
+    .pillars { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story { padding: 4.5rem 1.5rem; }
+    .cta { padding: 4rem 1.5rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 3rem 1.5rem; }
+  }
+  @media (max-width: 540px) {
+    .rate-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    .rate-price { text-align: left; }
+    .header-descriptor span { display: block; border-right: none; padding: 0.25rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#top">EatUrMood</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#rates">Rates</a></li>
+    <li><a href="https://www.eaturmood.com/collabs" target="_blank" rel="noopener">Work &#8599;</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="page-header" id="top">
+  <p class="page-header-eyebrow">Services &middot; EatUrMood Studio</p>
+  <h1>Brand Activation<br>&amp; <em>Creative Direction</em></h1>
+  <p class="header-sub">Turning ideas into brands people can see, feel, and remember.</p>
+  <p class="header-descriptor">
+    <span>Brand Film</span>
+    <span>Creative Direction</span>
+    <span>Partnerships</span>
+  </p>
+</header>
+
+<!-- SERVICES / PILLARS -->
+<section class="section reveal" id="services">
+  <hr class="section-rule">
+  <div class="pillars">
+    <div class="pillar">
+      <span class="pillar-num">01 &mdash; For Founders</span>
+      <h3>Brand Activation</h3>
+      <p>For founders ready to bring something into the world properly. I guide you through your brand&rsquo;s foundation &mdash; your story, your visual identity, and your first film.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">02 &mdash; For Brands</span>
+      <h3>Creative Direction</h3>
+      <p>For brands building a world around a product. I shape concept, styling, and execution so every image, film, and detail works together &mdash; to drive attention and demand.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">03 &mdash; For Partners</span>
+      <h3>Affiliate Partnerships</h3>
+      <p>The right partnership should feel aligned. I collaborate with brands I genuinely believe in, creating story-led content and placements designed to turn attention into action.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RATES -->
+<section class="section reveal" id="rates">
+  <div class="grid-header">
+    <h2>Rates</h2>
+    <span>Starting points</span>
+  </div>
+
+  <div class="rate-list">
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Brand Activation</p>
+        <p class="rate-desc">Immersive brand moments that extend beyond the image &mdash; designed to be felt, shared, and remembered.</p>
+      </div>
+      <div class="rate-price"><small>Starting at</small>$2,500</div>
+    </div>
+
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Creative Direction</p>
+        <p class="rate-desc">Full-service creative direction for brand campaigns, content, and product launches.</p>
+      </div>
+      <div class="rate-price"><small>Starting at</small>$5,000</div>
+    </div>
+
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Affiliate Partnerships</p>
+        <p class="rate-desc">Selective partnerships that turn archived material into new products and collections.</p>
+      </div>
+      <div class="rate-price"><small>Pricing</small>By inquiry</div>
+    </div>
+
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Content Editing</p>
+        <p class="rate-desc">From short-form video to campaign assets &mdash; refined for pacing, tone, and visual rhythm so the work feels elevated and commercially strong.</p>
+      </div>
+      <div class="rate-price"><small>Starting at</small>$500</div>
+    </div>
+
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Editorial Support</p>
+        <p class="rate-desc">Pitch decks and storytelling shaped from what you&rsquo;ve already produced.</p>
+      </div>
+      <div class="rate-price"><small>Starting at</small>$500</div>
+    </div>
+
+    <div class="rate-row">
+      <div>
+        <p class="rate-name">Brand Consulting</p>
+        <p class="rate-desc">One-on-one advisory to refine your brand, creative direction, and next strategic moves.</p>
+      </div>
+      <div class="rate-price"><small>Starting at</small>$250<span style="font-size:0.6em;"> / session</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story reveal">
+  <div class="story-inner">
+    <p class="story-eyebrow">The Origin</p>
+    <h2 class="story-title">Big Feelings, Great Taste.</h2>
+    <div class="story-body">
+      <p>Many full moons ago, in New Orleans, I was born into magic and contradiction.</p>
+      <p>I learned that things carry. Sticky air carried jazz and crickets. Oak trees carried bloodlines and secrets. Tall ceilings housed stories of horror and harmony.</p>
+      <p>Everything I carried came with me.</p>
+      <p>Up the Mississippi River for structure, then out West to make something of my own.</p>
+      <p>Today, it lives here &mdash; in a world of <em>big feelings, great taste</em>.</p>
+    </div>
+    <p class="story-sign">Sallie Stout &middot; Branding</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal" id="contact">
+  <p class="cta-eyebrow">Let&rsquo;s Work</p>
+  <h2 class="cta-title">What are you craving?</h2>
+  <a class="cta-btn" href="mailto:hello@eaturmood.com?subject=Project%20Inquiry%20%E2%80%94%20EatUrMood">Start a project &rarr;</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a class="footer-logo" href="https://www.eaturmood.com" target="_blank" rel="noopener">EatUrMood</a>
+      <p class="footer-tagline">A creative studio for mood-driven brands.<br>Directed by Sallie Townsend &middot; Santa Barbara, CA</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Explore</span>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="https://www.eaturmood.com/collabs" target="_blank" rel="noopener">Selected Work &#8599;</a></li>
+        <li><a href="https://www.eaturmood.com" target="_blank" rel="noopener">EatUrMood World &#8599;</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Contact</span>
+      <ul class="footer-links">
+        <li><a href="mailto:hello@eaturmood.com">hello@eaturmood.com</a></li>
+        <li><a href="https://www.instagram.com/eaturmood/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://pin.it/1MgYVOxvo" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 EatUrMood</span>
+    <span>Dining &middot; Design &middot; Desire</span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
