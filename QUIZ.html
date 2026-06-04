@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artiste × eaturmood — Instagram Strategy Discovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E7;
+    --paper-2:#EFE7D6;
+    --ink:#1A1512;
+    --ink-soft:#4A413A;
+    --wine:#7B1E2B;
+    --wine-deep:#4A1422;
+    --plum:#3D1A2C;
+    --gold:#B08A4F;
+    --gold-soft:#C9A86A;
+    --line:rgba(26,21,18,.14);
+    --shadow:0 18px 50px -22px rgba(61,26,44,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    background:
+      radial-gradient(120% 90% at 85% -10%, rgba(176,138,79,.16), transparent 55%),
+      radial-gradient(120% 100% at -10% 110%, rgba(123,30,43,.12), transparent 50%),
+      var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:32px 18px 80px;
+  }
+  /* subtle paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{width:100%;max-width:760px;position:relative;z-index:1}
+
+  /* ---------- Masthead ---------- */
+  .masthead{text-align:center;margin-bottom:26px}
+  .kicker{
+    font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--wine);font-weight:600;margin-bottom:14px;
+  }
+  .kicker span{color:var(--ink-soft)}
+  .rule{height:1px;background:var(--line);margin:14px auto;max-width:120px}
+
+  /* ---------- Card shell ---------- */
+  .card{
+    background:linear-gradient(180deg,#FBF7EE,#F3ECDC);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    padding:40px 40px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::after{
+    content:"";position:absolute;inset:8px;border:1px solid rgba(176,138,79,.28);
+    border-radius:3px;pointer-events:none;
+  }
+  .inner{position:relative;z-index:1}
+
+  /* ---------- Intro ---------- */
+  .display{
+    font-family:"Fraunces",serif;font-weight:400;line-height:1.04;
+    letter-spacing:-.01em;color:var(--ink);
+  }
+  .intro .display{font-size:clamp(34px,6.5vw,54px)}
+  .intro .display em{font-style:italic;color:var(--wine)}
+  .intro p.lede{
+    font-family:"Fraunces",serif;font-size:18px;color:var(--ink-soft);
+    margin:18px auto 0;max-width:50ch;line-height:1.55;
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 30px;
+  }
+  .tag{
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    padding:7px 13px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft);
+    background:rgba(255,255,255,.4);
+  }
+  .tag.no{color:var(--wine);border-color:rgba(123,30,43,.35)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family:"Hanken Grotesk",sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    padding:15px 30px;border-radius:3px;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s ease,background .2s ease,box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--wine);color:#F6F1E7;box-shadow:0 10px 24px -12px rgba(123,30,43,.8)}
+  .btn-primary:hover{background:var(--wine-deep);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  /* ---------- Progress ---------- */
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .progress .count{
+    font-family:"Fraunces",serif;font-style:italic;font-size:15px;color:var(--wine);white-space:nowrap;
+  }
+  .track{flex:1;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--wine));transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+  /* ---------- Question ---------- */
+  .q-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+  .q-title{font-family:"Fraunces",serif;font-size:clamp(24px,3.6vw,31px);line-height:1.12;color:var(--ink);letter-spacing:-.01em}
+  .q-help{font-size:14.5px;color:var(--ink-soft);margin-top:12px;max-width:56ch;line-height:1.55}
+  .q-body{margin-top:26px}
+
+  .opts{display:grid;gap:10px}
+  .opts.two{grid-template-columns:1fr 1fr}
+  @media(max-width:560px){.opts.two{grid-template-columns:1fr}.card{padding:28px 22px}}
+  .opt{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    padding:14px 16px;border:1px solid var(--line);border-radius:4px;
+    background:rgba(255,255,255,.45);cursor:pointer;font-size:15px;color:var(--ink);
+    transition:all .16s ease;font-weight:500;line-height:1.35;
+  }
+  .opt:hover{border-color:var(--gold);background:rgba(255,255,255,.8)}
+  .opt .mark{
+    width:18px;height:18px;border:1.5px solid var(--ink-soft);flex:0 0 auto;
+    display:grid;place-items:center;transition:all .16s ease;
+  }
+  .opt.radio .mark{border-radius:50%}
+  .opt.check .mark{border-radius:4px}
+  .opt .mark svg{width:11px;height:11px;opacity:0;transform:scale(.5);transition:all .16s ease;color:#F6F1E7}
+  .opt.sel{border-color:var(--wine);background:rgba(123,30,43,.07)}
+  .opt.sel .mark{background:var(--wine);border-color:var(--wine)}
+  .opt.sel .mark svg{opacity:1;transform:scale(1)}
+  .opt.disabled{opacity:.45;pointer-events:none}
+
+  textarea,select,input[type=text],input[type=email]{
+    width:100%;font-family:"Hanken Grotesk",sans-serif;font-size:15px;color:var(--ink);
+    background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:4px;
+    padding:13px 14px;resize:vertical;transition:border .16s ease;
+  }
+  textarea:focus,select:focus,input[type=text]:focus,input[type=email]:focus{outline:none;border-color:var(--wine)}
+  textarea{min-height:84px;line-height:1.5}
+  .field-label{font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:20px 0 8px;display:block}
+
+  /* slider */
+  .slider-wrap{margin-top:8px}
+  .slider-labels{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:8px}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--line);border-radius:2px;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--wine);cursor:pointer;border:3px solid var(--paper);box-shadow:0 2px 8px rgba(123,30,43,.5)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--wine);cursor:pointer;border:3px solid var(--paper)}
+
+  .cap-note{font-size:12.5px;color:var(--wine);margin-top:10px;font-style:italic;font-family:"Fraunces",serif}
+
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:34px;gap:14px}
+
+  /* ---------- Summary ---------- */
+  .brief-head{text-align:center;margin-bottom:8px}
+  .brief-head .display{font-size:clamp(28px,5vw,42px)}
+  .brief-head .display em{font-style:italic;color:var(--wine)}
+  .brief-sub{font-size:14px;color:var(--ink-soft);margin-top:10px}
+  .brief{margin-top:26px;border-top:1px solid var(--line)}
+  .brief .row{padding:20px 2px;border-bottom:1px solid var(--line)}
+  .brief .row h4{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
+  .brief .row .ans{font-family:"Fraunces",serif;font-size:17px;color:var(--ink);line-height:1.5}
+  .brief .row .ans .pill{
+    display:inline-block;font-family:"Hanken Grotesk",sans-serif;font-size:12.5px;font-weight:600;
+    background:rgba(123,30,43,.08);color:var(--wine);border:1px solid rgba(123,30,43,.2);
+    padding:4px 11px;border-radius:100px;margin:3px 5px 3px 0;
+  }
+  .brief .row .ans .empty{color:var(--ink-soft);font-style:italic;font-size:14px;opacity:.7}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .sendbox{margin-top:30px;padding:24px;border:1px solid rgba(176,138,79,.4);border-radius:5px;background:rgba(255,255,255,.45)}
+  .sendbox .field-label{margin-top:0}
+  .send-status{margin-top:14px;font-size:14px;line-height:1.5;font-family:"Fraunces",serif}
+  .send-status.ok{color:#2f6b3f}
+  .send-status.err{color:var(--wine)}
+  .toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--paper);padding:12px 22px;border-radius:4px;font-size:13px;
+    letter-spacing:.05em;opacity:0;pointer-events:none;transition:all .3s ease;z-index:50;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .step{animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  .foot{text-align:center;margin-top:22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);opacity:.7}
+
+  @media print{
+    body{background:#fff;padding:0}
+    body::before{display:none}
+    .card::after{display:none}
+    .card{box-shadow:none;border:none}
+    .actions,.progress,.foot{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="kicker">Artiste Winery &amp; Gallery <span>×</span> eaturmood</div>
+    <div class="rule"></div>
+    <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-soft);font-weight:600">Instagram Strategy — Discovery Session</div>
+  </div>
+
+  <div class="card"><div class="inner" id="stage"></div></div>
+
+  <div class="foot">A 30–45 Day Content Strategy · Facilitated by eaturmood</div>
+</div>
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+/* =========================================================
+   SAL — ONE-TIME SETUP (takes ~3 min):
+   1. Go to formspree.io, sign up free, create a new form.
+   2. Copy your form endpoint (looks like https://formspree.io/f/abcdwxyz)
+   3. Paste it between the quotes below, replacing YOUR_FORM_ID.
+   4. Submit the quiz once yourself to confirm the form (Formspree
+      emails you a one-time "confirm your email" link the first time).
+   That's it — every client submission now lands in your inbox.
+   ========================================================= */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mzdorlad";
+
+/* ---------------- Data model ---------------- */
+const QUESTIONS = [
+  {
+    key:"goal",
+    eyebrow:"01 — The Objective",
+    title:"What does winning look like in the next 30–45 days?",
+    help:"Pick the one outcome the feed should serve hardest. We can support others — but a strategy needs a north star.",
+    type:"radio",
+    options:[
+      "Tasting-room reservations & walk-ins",
+      "Club Artiste sign-ups",
+      "Online wine sales (releases, sets)",
+      "Event & workshop attendance",
+      "Brand awareness with the 25–35 crowd",
+      "Email list growth"
+    ],
+    text:{label:"Define winning in one sentence", ph:"e.g. \"Fill the Friday tasting slots with a younger, art-curious crowd.\""}
+  },
+  {
+    key:"hook",
+    eyebrow:"02 — The Younger Audience",
+    title:"Why would a 25–35-year-old fall for Artiste?",
+    help:"Select every angle you believe pulls a younger guest. This tells me where to point the lens.",
+    type:"check",
+    options:[
+      "The art collaborations (LCAD / emerging artists)",
+      "Paint-&-taste studio experience",
+      "Collectible labels & gallery aesthetic",
+      "Group & celebration energy (birthdays, trips)",
+      "An approachable, un-snobby way into wine",
+      "Santa Ynez day-trip / weekend culture",
+      "The winemaker's story (Bion Rice, since '99)",
+      "Awards & credibility (Double Gold Pinots)"
+    ],
+    text:{label:"Anything we're missing?", ph:"Other reasons a younger guest would love it…"}
+  },
+  {
+    key:"voice",
+    eyebrow:"03 — The Voice",
+    title:"Pick the three words that should come through every post.",
+    help:"Choose up to 3. Tone is what makes a feed feel like a person, not a brochure.",
+    type:"check",
+    cap:3,
+    options:["Playful","Refined","Artistic","Warm","Witty","Bold","Sensory","Understated","Romantic","Cultured","Effortless","Irreverent"],
+    slider:{label:"Overall energy", left:"Polished", right:"Candid", def:45}
+  },
+  {
+    key:"capture",
+    eyebrow:"04 — What's Real & On Camera",
+    title:"What can we actually put in front of the lens?",
+    help:"No AI, no stock — so everything is original capture. Tell me what's accessible and we'll build the calendar around it.",
+    type:"check",
+    options:[
+      "Live tastings & pours","Artists painting / studio sessions","Bion blending / cellar work",
+      "The gallery & art walls","Events & exhibition openings","Staff personalities",
+      "Vineyard & Santa Ynez landscape","Food & pairings","Guests (with consent)"
+    ],
+    select:{label:"Realistic shoot days per month", options:["1 day","2 days","3–4 days","Weekly","We can self-capture on phones anytime"]},
+    text:{label:"Who's behind the camera, and how often can we capture?", ph:"e.g. \"Sal films monthly; staff grab phone clips during events.\""}
+  },
+  {
+    key:"calendar",
+    eyebrow:"05 — Calendar Fuel",
+    title:"What's actually happening in the next 30–45 days?",
+    help:"Real moments anchor the calendar. Check the recurring hooks, then list specifics with dates.",
+    type:"check",
+    options:["New release(s)","Artist opening / exhibition","Blending workshop","Private event","Seasonal / holiday moment","Press or award news","Club Artiste drop"],
+    text:{label:"List the specifics (with dates if you have them)", ph:"e.g. \"May 9 — Plants Are People Too opening + Flower Bar. June — summer rosé release.\""}
+  },
+  {
+    key:"oneThing",
+    eyebrow:"06 — The One Thing",
+    title:"If a stranger remembers ONE thing after seeing the feed…",
+    help:"What should it be? This becomes the spine every post ladders back to.",
+    type:"text-only",
+    text:{label:"The one thing", ph:"e.g. \"Artiste is where original art and original wine are made in the same room.\""},
+    text2:{label:"Which proof point should we lean on hardest?", ph:"e.g. Double Gold Pinots · LCAD artist labels · SB Magazine 50th set · Plants Are People Too"}
+  },
+  {
+    key:"guardrails",
+    eyebrow:"07 — Guardrails",
+    title:"The hard nos — beyond no-AI and no-stock.",
+    help:"Select what's off-limits so I never put it in front of you. These two are already locked.",
+    type:"check",
+    locked:["No AI-generated imagery","No stock photography"],
+    options:[
+      "Don't read as \"stuffy / old-school wine\"","Keep the art front-and-center","No heavy-discount / clearance tone",
+      "Don't show pricing in-feed","Avoid trend-chasing audio & memes","Stay elegant — no gimmicks"
+    ],
+    text:{label:"Any other do-not-do's?", ph:"Words, looks, or topics to avoid…"}
+  },
+  {
+    key:"references",
+    eyebrow:"08 — Taste Check & Reality",
+    title:"Whose feeds do you admire — and what's the current setup?",
+    help:"References calibrate the look; the operational truth keeps the plan realistic.",
+    type:"text-only",
+    text:{label:"Accounts you'd love to feel adjacent to (IG handles)", ph:"@account, @account, @account…"},
+    text2:{label:"Who runs the IG now, and how often do you post today?", ph:"e.g. \"Front-desk lead posts ~2×/week, no real plan.\""},
+    text3:{label:"Biggest frustration with the current feed?", ph:"What's not working right now…"}
+  }
+];
+
+const answers = {};
+let idx = -1; // -1 = intro, QUESTIONS.length = summary
+
+const stage = document.getElementById("stage");
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+function render(){
+  if(idx === -1) return renderIntro();
+  if(idx >= QUESTIONS.length) return renderSummary();
+  return renderQuestion(QUESTIONS[idx]);
+}
+
+function renderIntro(){
+  stage.innerHTML = `
+   <div class="step intro" style="text-align:center">
+     <h1 class="display">A short conversation<br>before the <em>strategy</em>.</h1>
+     <p class="lede">Eight questions to map Artiste's goals, voice, and what we can truly capture — so the next 30–45 days of Instagram feel intentional, original, and unmistakably yours.</p>
+     <div class="meta-row">
+       <span class="tag">8 Questions · ~6 min</span>
+       <span class="tag">Built for Plann</span>
+       <span class="tag no">No AI</span>
+       <span class="tag no">No Stock</span>
+     </div>
+     <button class="btn btn-primary" onclick="next()">Begin the Discovery →</button>
+   </div>`;
+}
+
+function renderQuestion(q){
+  const a = answers[q.key] || {};
+  let body = "";
+
+  if(q.locked){
+    body += `<div class="opts" style="margin-bottom:14px">` + q.locked.map(l =>
+      `<div class="opt check sel disabled"><span class="mark">${CHECK}</span>${l} <span style="margin-left:auto;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--wine);font-weight:700">Locked</span></div>`
+    ).join("") + `</div>`;
+  }
+
+  if(q.type === "radio" || q.type === "check"){
+    const sel = new Set(a.choices || []);
+    const cls = q.type === "radio" ? "radio" : "check";
+    const two = q.options.length > 6 ? "" : "";
+    body += `<div class="opts" id="opts">` + q.options.map(o => {
+      const on = sel.has(o);
+      return `<div class="opt ${cls} ${on?'sel':''}" data-v="${esc(o)}" onclick="toggle('${q.key}','${q.type}','${esc(o)}',${q.cap||0})"><span class="mark">${CHECK}</span>${o}</div>`;
+    }).join("") + `</div>`;
+    if(q.cap) body += `<div class="cap-note" id="capnote">${(sel.size)}/${q.cap} selected</div>`;
+  }
+
+  if(q.slider){
+    const v = a.slider ?? q.slider.def;
+    body += `<div class="slider-wrap"><span class="field-label">${q.slider.label}</span>
+      <div class="slider-labels"><span>${q.slider.left}</span><span>${q.slider.right}</span></div>
+      <input type="range" min="0" max="100" value="${v}" oninput="setVal('${q.key}','slider',this.value)"></div>`;
+  }
+
+  if(q.select){
+    const v = a.select || "";
+    body += `<span class="field-label">${q.select.label}</span><select onchange="setVal('${q.key}','select',this.value)">
+      <option value="" ${v?'':'selected'} disabled>Choose one…</option>
+      ${q.select.options.map(o=>`<option ${v===o?'selected':''}>${o}</option>`).join("")}</select>`;
+  }
+
+  ["text","text2","text3"].forEach(t=>{
+    if(q[t]) body += `<span class="field-label">${q[t].label}</span>
+      <textarea placeholder="${q[t].ph}" oninput="setVal('${q.key}','${t}',this.value)">${esc(a[t]||"")}</textarea>`;
+  });
+
+  stage.innerHTML = `
+    <div class="step">
+      <div class="progress">
+        <span class="count">No.&nbsp;${String(idx+1).padStart(2,'0')} / ${String(QUESTIONS.length).padStart(2,'0')}</span>
+        <div class="track"><div class="bar" style="width:${((idx)/(QUESTIONS.length))*100}%"></div></div>
+      </div>
+      <div class="q-eyebrow">${q.eyebrow}</div>
+      <h2 class="q-title">${q.title}</h2>
+      <p class="q-help">${q.help}</p>
+      <div class="q-body">${body}</div>
+      <div class="nav">
+        <button class="btn btn-ghost" onclick="prev()">← Back</button>
+        <button class="btn btn-primary" onclick="next()">${idx === QUESTIONS.length-1 ? 'See the Brief →' : 'Next →'}</button>
+      </div>
+    </div>`;
+}
+
+/* ---------------- State handlers ---------------- */
+function ensure(key){ if(!answers[key]) answers[key] = {}; return answers[key]; }
+
+function toggle(key,type,val,cap){
+  const a = ensure(key);
+  let set = new Set(a.choices || []);
+  if(type === "radio"){ set = new Set([val]); }
+  else {
+    if(set.has(val)) set.delete(val);
+    else { if(cap && set.size >= cap) return; set.add(val); }
+  }
+  a.choices = [...set];
+  // re-render options region only for snappy feel
+  document.querySelectorAll('#opts .opt').forEach(el=>{
+    const on = set.has(el.dataset.v);
+    el.classList.toggle('sel', on);
+  });
+  const cn = document.getElementById('capnote');
+  if(cn) cn.textContent = `${set.size}/${cap} selected`;
+}
+function setVal(key,field,val){ ensure(key)[field] = val; }
+
+function next(){ idx++; window.scrollTo({top:0,behavior:'smooth'}); render(); }
+function prev(){ idx--; window.scrollTo({top:0,behavior:'smooth'}); render(); }
+
+/* ---------------- Summary ---------------- */
+function renderSummary(){
+  const rows = QUESTIONS.map(q=>{
+    const a = answers[q.key] || {};
+    let html = "";
+    const locked = q.locked ? q.locked.map(l=>`<span class="pill">${l}</span>`).join("") : "";
+    if(a.choices && a.choices.length) html += a.choices.map(c=>`<span class="pill">${c}</span>`).join("");
+    html += locked;
+    if(a.slider !== undefined && q.slider){
+      const pct = a.slider; const word = pct < 40 ? q.slider.left : pct > 60 ? q.slider.right : "Balanced";
+      html += `<div style="margin-top:8px"><span class="pill">${q.slider.label}: ${word} (${pct}%)</span></div>`;
+    }
+    if(a.select) html += `<div style="margin-top:8px"><span class="pill">${a.select}</span></div>`;
+    ["text","text2","text3"].forEach(t=>{
+      if(a[t] && a[t].trim()) html += `<div style="margin-top:10px">${q[t]?'<em style="font-style:normal;color:var(--ink-soft);font-size:13px">'+q[t].label+'</em><br>':''}${esc(a[t])}</div>`;
+    });
+    if(!html.trim()) html = `<span class="empty">— not yet answered —</span>`;
+    return `<div class="row"><h4>${q.eyebrow.replace(/—.*$/, '').trim()} · ${stripNo(q.title)}</h4><div class="ans">${html}</div></div>`;
+  }).join("");
+
+  stage.innerHTML = `
+    <div class="step">
+      <div class="brief-head">
+        <h1 class="display">The Discovery <em>Brief</em></h1>
+        <p class="brief-sub">Artiste Winery &amp; Gallery · Instagram · 30–45 Day Strategy Inputs</p>
+      </div>
+      <div class="brief">${rows}</div>
+      <div class="sendbox">
+        <label class="field-label" for="respName">Filled out by (name &amp; role)</label>
+        <input id="respName" type="text" placeholder="e.g. Jordan — Tasting Room Manager" />
+        <button class="btn btn-primary" id="sendBtn" onclick="submitBrief()" style="margin-top:16px;width:100%">Send Answers to Sal →</button>
+        <div class="send-status" id="sendStatus"></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="copyBrief()">Copy</button>
+        <button class="btn btn-ghost" onclick="downloadBrief()">Download .txt</button>
+        <button class="btn btn-ghost" onclick="window.print()">Print / PDF</button>
+        <button class="btn btn-ghost" onclick="idx=0;render()">Edit Answers</button>
+      </div>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function stripNo(s){ return s.replace(/—.*/,'').replace(/\?$/,'').trim().slice(0,46) + (s.length>46?'…':''); }
+
+function briefText(){
+  let out = "ARTISTE WINERY & GALLERY × eaturmood\nInstagram Strategy — Discovery Brief\n" + "=".repeat(48) + "\n\n";
+  QUESTIONS.forEach((q,i)=>{
+    const a = answers[q.key] || {};
+    out += `${String(i+1).padStart(2,'0')}. ${q.title}\n`;
+    if(q.locked) q.locked.forEach(l=>out += `   • ${l} (locked)\n`);
+    if(a.choices) a.choices.forEach(c=>out += `   • ${c}\n`);
+    if(a.slider!==undefined && q.slider){ const p=a.slider; const w=p<40?q.slider.left:p>60?q.slider.right:"Balanced"; out+=`   • ${q.slider.label}: ${w} (${p}%)\n`; }
+    if(a.select) out += `   • ${a.select}\n`;
+    ["text","text2","text3"].forEach(t=>{ if(a[t]&&a[t].trim()) out += `   ${q[t].label}: ${a[t].trim()}\n`; });
+    out += "\n";
+  });
+  out += "=".repeat(48) + "\nNext step: translate into a 30–45 day Plann calendar.\nNo AI imagery · No stock · Original capture only.\n";
+  return out;
+}
+
+function copyBrief(){
+  navigator.clipboard.writeText(briefText()).then(()=>showToast("Brief copied to clipboard")).catch(()=>showToast("Copy failed — try Download"));
+}
+function downloadBrief(){
+  const blob = new Blob([briefText()],{type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "Artiste-Discovery-Brief.txt"; a.click();
+  URL.revokeObjectURL(url); showToast("Downloaded");
+}
+function showToast(msg){
+  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+async function submitBrief(){
+  const btn = document.getElementById("sendBtn");
+  const status = document.getElementById("sendStatus");
+  if(FORMSPREE_ENDPOINT.indexOf("YOUR_FORM_ID") !== -1){
+    status.className = "send-status err";
+    status.innerHTML = "Setup needed: paste your Formspree endpoint into the file before this can send. (Use Download .txt for now.)";
+    return;
+  }
+  const payload = { _subject: "Artiste × eaturmood — new IG discovery submission" };
+  const who = (document.getElementById("respName")||{}).value || "";
+  if(who.trim()) payload["Filled out by"] = who.trim();
+  QUESTIONS.forEach((q,i)=>{
+    const a = answers[q.key] || {}; const parts = [];
+    if(q.locked) q.locked.forEach(l=>parts.push(l+" (locked)"));
+    if(a.choices) a.choices.forEach(c=>parts.push(c));
+    if(a.slider!==undefined && q.slider){ const p=a.slider; const w=p<40?q.slider.left:p>60?q.slider.right:"Balanced"; parts.push(q.slider.label+": "+w+" ("+p+"%)"); }
+    if(a.select) parts.push(a.select);
+    ["text","text2","text3"].forEach(t=>{ if(a[t]&&a[t].trim()) parts.push(q[t].label+" — "+a[t].trim()); });
+    payload[String(i+1).padStart(2,"0")+". "+q.title] = parts.length ? parts.join("  |  ") : "(blank)";
+  });
+  payload["— FULL BRIEF —"] = briefText();
+
+  btn.disabled = true; btn.textContent = "Sending…";
+  status.className = "send-status"; status.textContent = "";
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      status.className = "send-status ok";
+      status.innerHTML = "Sent — thank you. Your answers are on their way to Sal.";
+      btn.textContent = "Sent ✓";
+    } else { throw new Error("bad"); }
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Send Answers to Sal →";
+    status.className = "send-status err";
+    status.innerHTML = "Couldn't send automatically. Please tap <b>Download .txt</b> below and email the file to Sal.";
+  }
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+render();
+</script>
+</body>
+</html>
