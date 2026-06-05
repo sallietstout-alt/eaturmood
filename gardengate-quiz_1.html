@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girl at the Garden Gate × eaturmood — Social Strategy Discovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EFDF;
+    --paper-2:#ECE5D0;
+    --ink:#22281E;
+    --ink-soft:#525847;
+    --green:#234B3A;
+    --green-deep:#16291F;
+    --burgundy:#5E1F2A;
+    --rose:#C98C84;
+    --rose-soft:#EAD0CA;
+    --blush:#F1DBD5;
+    --gold:#B79B6A;
+    --line:rgba(34,40,30,.15);
+    --shadow:0 18px 50px -22px rgba(34,75,58,.5);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    background:
+      radial-gradient(120% 90% at 88% -10%, rgba(201,140,132,.22), transparent 55%),
+      radial-gradient(120% 100% at -10% 110%, rgba(35,75,58,.14), transparent 50%),
+      var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:32px 18px 80px;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{width:100%;max-width:760px;position:relative;z-index:1}
+
+  /* ---------- Masthead ---------- */
+  .masthead{text-align:center;margin-bottom:26px}
+  .kicker{
+    font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--burgundy);font-weight:600;margin-bottom:10px;
+  }
+  .kicker span{color:var(--ink-soft)}
+  .flourish{font-family:"Pinyon Script",cursive;font-size:30px;color:var(--green);line-height:1;margin:2px 0 6px}
+  .rule{height:1px;background:var(--line);margin:14px auto;max-width:120px}
+  .sub{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+  /* ---------- Card shell ---------- */
+  .card{
+    background:linear-gradient(180deg,#FBF8EE,#F1EAD7);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    padding:40px 40px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::after{
+    content:"";position:absolute;inset:8px;border:1px solid rgba(35,75,58,.25);
+    border-radius:3px;pointer-events:none;
+  }
+  .inner{position:relative;z-index:1}
+
+  /* ---------- Intro ---------- */
+  .display{
+    font-family:"Cormorant Garamond",serif;font-weight:500;line-height:1.04;
+    letter-spacing:0;color:var(--ink);
+  }
+  .intro .display{font-size:clamp(38px,7vw,60px)}
+  .intro .display em{font-style:italic;color:var(--burgundy);font-weight:400}
+  .intro p.lede{
+    font-family:"Cormorant Garamond",serif;font-size:21px;color:var(--ink-soft);
+    margin:18px auto 0;max-width:46ch;line-height:1.5;font-weight:400;
+  }
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 30px}
+  .tag{
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    padding:7px 13px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft);
+    background:rgba(255,255,255,.4);
+  }
+  .tag.accent{color:var(--green);border-color:rgba(35,75,58,.35)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family:"Hanken Grotesk",sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    padding:15px 30px;border-radius:3px;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s ease,background .2s ease,box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--green);color:#F6F2E4;box-shadow:0 10px 24px -12px rgba(35,75,58,.85)}
+  .btn-primary:hover{background:var(--green-deep);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  /* ---------- Progress ---------- */
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .progress .count{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:17px;color:var(--burgundy);white-space:nowrap}
+  .track{flex:1;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--green));transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+  /* ---------- Question ---------- */
+  .q-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:12px}
+  .q-title{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(27px,4.2vw,36px);line-height:1.1;color:var(--ink);letter-spacing:0}
+  .q-help{font-size:14.5px;color:var(--ink-soft);margin-top:12px;max-width:56ch;line-height:1.55}
+  .q-body{margin-top:26px}
+
+  .opts{display:grid;gap:10px}
+  @media(max-width:560px){.card{padding:28px 22px}}
+  .opt{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    padding:14px 16px;border:1px solid var(--line);border-radius:4px;
+    background:rgba(255,255,255,.45);cursor:pointer;font-size:15px;color:var(--ink);
+    transition:all .16s ease;font-weight:500;line-height:1.35;
+  }
+  .opt:hover{border-color:var(--green);background:rgba(255,255,255,.8)}
+  .opt .mark{
+    width:18px;height:18px;border:1.5px solid var(--ink-soft);flex:0 0 auto;
+    display:grid;place-items:center;transition:all .16s ease;
+  }
+  .opt.radio .mark{border-radius:50%}
+  .opt.check .mark{border-radius:4px}
+  .opt .mark svg{width:11px;height:11px;opacity:0;transform:scale(.5);transition:all .16s ease;color:#F6F2E4}
+  .opt.sel{border-color:var(--green);background:rgba(35,75,58,.08)}
+  .opt.sel .mark{background:var(--green);border-color:var(--green)}
+  .opt.sel .mark svg{opacity:1;transform:scale(1)}
+
+  textarea,select,input[type=text],input[type=email]{
+    width:100%;font-family:"Hanken Grotesk",sans-serif;font-size:15px;color:var(--ink);
+    background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:4px;
+    padding:13px 14px;resize:vertical;transition:border .16s ease;
+  }
+  textarea:focus,select:focus,input[type=text]:focus,input[type=email]:focus{outline:none;border-color:var(--green)}
+  textarea{min-height:84px;line-height:1.5}
+  .field-label{font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:20px 0 8px;display:block}
+
+  .slider-wrap{margin-top:8px}
+  .slider-labels{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:8px}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--line);border-radius:2px;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid var(--paper);box-shadow:0 2px 8px rgba(35,75,58,.5)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--green);cursor:pointer;border:3px solid var(--paper)}
+
+  .cap-note{font-size:13px;color:var(--burgundy);margin-top:10px;font-style:italic;font-family:"Cormorant Garamond",serif}
+
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:34px;gap:14px}
+
+  /* ---------- Summary ---------- */
+  .brief-head{text-align:center;margin-bottom:8px}
+  .brief-head .display{font-size:clamp(30px,5.5vw,46px)}
+  .brief-head .display em{font-style:italic;color:var(--burgundy)}
+  .brief-sub{font-size:14px;color:var(--ink-soft);margin-top:10px}
+  .brief{margin-top:26px;border-top:1px solid var(--line)}
+  .brief .row{padding:20px 2px;border-bottom:1px solid var(--line)}
+  .brief .row h4{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:9px}
+  .brief .row .ans{font-family:"Cormorant Garamond",serif;font-size:19px;color:var(--ink);line-height:1.5}
+  .brief .row .ans .pill{
+    display:inline-block;font-family:"Hanken Grotesk",sans-serif;font-size:12.5px;font-weight:600;
+    background:rgba(35,75,58,.08);color:var(--green);border:1px solid rgba(35,75,58,.22);
+    padding:4px 11px;border-radius:100px;margin:3px 5px 3px 0;
+  }
+  .brief .row .ans .empty{color:var(--ink-soft);font-style:italic;font-size:14px;opacity:.7}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .sendbox{margin-top:30px;padding:24px;border:1px solid rgba(35,75,58,.4);border-radius:5px;background:rgba(255,255,255,.45)}
+  .sendbox .field-label{margin-top:0}
+  .send-status{margin-top:14px;font-size:15px;line-height:1.5;font-family:"Cormorant Garamond",serif}
+  .send-status.ok{color:var(--green)}
+  .send-status.err{color:var(--burgundy)}
+  .toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--paper);padding:12px 22px;border-radius:4px;font-size:13px;
+    letter-spacing:.05em;opacity:0;pointer-events:none;transition:all .3s ease;z-index:50;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .step{animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  .foot{text-align:center;margin-top:22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);opacity:.7}
+
+  @media print{
+    body{background:#fff;padding:0}
+    body::before{display:none}
+    .card::after{display:none}
+    .card{box-shadow:none;border:none}
+    .actions,.sendbox,.progress,.foot{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="kicker">Girl at the Garden Gate <span>×</span> eaturmood</div>
+    <div class="flourish">Fleurs</div>
+    <div class="rule"></div>
+    <div class="sub">Social Strategy — Discovery Session</div>
+  </div>
+
+  <div class="card"><div class="inner" id="stage"></div></div>
+
+  <div class="foot">A 90-Day Plan · Two 45-Day Chapters · Facilitated by eaturmood</div>
+</div>
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+/* =========================================================
+   SAL — this quiz emails answers to you via Formspree.
+   It's pre-set to the SAME form you made for Artiste, so
+   submissions land in the same inbox, clearly tagged
+   "Girl at the Garden Gate" in the subject line.
+   • Want them kept separate? Make a second free form at
+     formspree.io and paste its endpoint below.
+   • Host this file the same way as the Artiste quiz
+     (GitHub → your eaturmood repo), then link to it.
+   ========================================================= */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mzdorlad";
+
+/* ---------------- Data model ---------------- */
+const QUESTIONS = [
+  {
+    key:"arc",
+    eyebrow:"01 — The 90-Day Arc",
+    title:"Across 90 days, what leads first — and what leads second?",
+    help:"We're planning in two 45-day chapters. Tell me which of her three goals each chapter should push hardest, and we'll sequence everything else around it.",
+    type:"radio",
+    options:[
+      "Grow the audience",
+      "Share the English Gardening School journey",
+      "Build &amp; launch the mobile Gate"
+    ],
+    select:{label:"Then the SECOND 45 days should lead with…", options:["Grow the audience","Share the Gardening School journey","Build & launch the mobile Gate","Sustain & sell across all three"]},
+    text:{label:"The one milestone to hit by Day 90", ph:"e.g. The mobile Gate open for its first weekend market, with a waitlist."}
+  },
+  {
+    key:"audience",
+    eyebrow:"02 — Growing the Audience",
+    title:"Who is she trying to reach?",
+    help:"Select every group worth speaking to. This shapes who we make the content for.",
+    type:"check",
+    options:[
+      "English-garden &amp; cottage aesthetic lovers",
+      "Home gardeners wanting to learn",
+      "Slow-living &amp; lifestyle followers",
+      "Local community (future Gate customers)",
+      "Floral &amp; event clients",
+      "Interiors &amp; design crowd",
+      "Aspirational dreamers who love the romance",
+      "Fellow gardeners &amp; horticulture students"
+    ],
+    text:{label:"Describe her dream follower in a sentence", ph:"Who lights up when this account appears in their feed?"}
+  },
+  {
+    key:"school",
+    eyebrow:"03 — The Garden School Thread",
+    title:"What should she teach and share from the English Gardening School?",
+    help:"This is the authority-and-story engine — the knowledge and experience the feed passes on.",
+    type:"check",
+    options:[
+      "Seasonal planting &amp; how-tos",
+      "Garden design principles",
+      "Plant profiles &amp; ID (roseglow, witchgrass, conifers…)",
+      "Floristry &amp; arranging",
+      "Kitchen garden &amp; edibles",
+      "Behind-the-scenes of the school &amp; London",
+      "The philosophy &amp; romance of gardening",
+      "Her personal journey &amp; lessons learned"
+    ],
+    select:{label:"How much of the feed should teach vs. simply inspire?", options:["Mostly teaching","Half teaching, half lifestyle","Mostly lifestyle, light teaching"]},
+    text:{label:"The #1 thing a follower should learn from her", ph:"e.g. That anyone can start a garden — and it is worth it."}
+  },
+  {
+    key:"gate",
+    eyebrow:"04 — The Mobile Gate",
+    title:"The mobile Gate — what does it sell, and when does it open?",
+    help:"Timing drives the calendar: a slow build-up, a launch moment, or an already-open rhythm each look completely different.",
+    type:"check",
+    options:[
+      "Cut flowers &amp; bouquets","Potted plants &amp; herbs","Local produce (citrus, seasonal)",
+      "Pantry &amp; local goods","Garden tools &amp; sundries","Workshops &amp; pop-up events","Bespoke / event florals"
+    ],
+    select:{label:"When does the Gate launch?", options:["It's already open","Within the first 45 days","In the second 45 days (Day 46–90)","After this 90-day window"]},
+    text:{label:"Where will it pop up — and the dream first stop?", ph:"Markets, towns, events… plus the one debut she'd love most."}
+  },
+  {
+    key:"voice",
+    eyebrow:"05 — Voice &amp; Aesthetic",
+    title:"Pick the three words that should run through every post.",
+    help:"Choose up to 3. Her look is already strong — this locks the feeling into words.",
+    type:"check",
+    cap:3,
+    options:["Romantic","Heritage","Elegant","Warm","Witty","Educational","Aspirational","Down-to-earth","Whimsical","Nostalgic","Poetic","Refined"],
+    slider:{label:"Overall feel", left:"Polished", right:"Candid", def:40}
+  },
+  {
+    key:"capture",
+    eyebrow:"06 — What She Can Show",
+    title:"What can she realistically put on camera?",
+    help:"Original footage is the lifeblood of a personal lifestyle brand. Tell me what's accessible — and how she feels about being seen.",
+    type:"check",
+    options:[
+      "Her own garden &amp; seasonal changes","The Gardening School / London","The build of the mobile Gate",
+      "Flower &amp; plant close-ups","Styling &amp; arranging","Sourcing trips &amp; local makers",
+      "Her home &amp; lifestyle","Herself — face &amp; voice on camera"
+    ],
+    select:{label:"Realistic capture cadence", options:["Daily phone moments","Weekly","2–3 dedicated shoots/month","Monthly shoot","Sal films periodically"]},
+    text:{label:"How does she feel about showing her face & voice?", ph:"All in? Camera-shy? Voiceovers only? This shapes the whole format mix."}
+  },
+  {
+    key:"reality",
+    eyebrow:"07 — Reality &amp; References",
+    title:"Where is the account today — and whose feeds does she love?",
+    help:"The honest starting point, plus a few references, keep the plan grounded and on-taste.",
+    type:"text-only",
+    text:{label:"Who runs it now · current following · posting rhythm", ph:"e.g. She posts ~1×/week, ~2k followers, no real plan yet."},
+    text2:{label:"Accounts she admires or wants to feel adjacent to (handles)", ph:"@account, @account, @account…"},
+    text3:{label:"Biggest frustration with the feed right now", ph:"What isn't working yet…"}
+  },
+  {
+    key:"oneThing",
+    eyebrow:"08 — Guardrails &amp; The One Thing",
+    title:"Anything we should never do — and the one thing to always land.",
+    help:"Check what's off-limits, then tell me the single feeling every post should leave behind.",
+    type:"check",
+    options:[
+      "Keep it elegant — no gimmicks","Stay true to the heritage look","No trend-chasing audio or memes",
+      "Never oversaturate the selling","Protect the romance — never feel corporate"
+    ],
+    text:{label:"Any other hard nos?", ph:"Words, looks, or topics to avoid…"},
+    text2:{label:"The ONE thing a stranger should remember", ph:"e.g. Girl at the Garden Gate is where English-garden romance meets real, learnable gardening."}
+  }
+];
+
+const answers = {};
+let idx = -1;
+
+const stage = document.getElementById("stage");
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+function render(){
+  if(idx === -1) return renderIntro();
+  if(idx >= QUESTIONS.length) return renderSummary();
+  return renderQuestion(QUESTIONS[idx]);
+}
+
+function renderIntro(){
+  stage.innerHTML = `
+   <div class="step intro" style="text-align:center">
+     <h1 class="display">Every garden begins<br>at the <em>gate</em>.</h1>
+     <p class="lede">Eight questions to map her goals, voice, and story — so the next 90 days unfold in two clear chapters: growing the audience, sharing the garden school, and opening the mobile Gate.</p>
+     <div class="meta-row">
+       <span class="tag">8 Questions · ~6 min</span>
+       <span class="tag">90-Day Plan</span>
+       <span class="tag accent">Two 45-Day Chapters</span>
+     </div>
+     <button class="btn btn-primary" onclick="next()">Begin the Discovery →</button>
+   </div>`;
+}
+
+function renderQuestion(q){
+  const a = answers[q.key] || {};
+  let body = "";
+
+  if(q.type === "radio" || q.type === "check"){
+    const sel = new Set(a.choices || []);
+    const cls = q.type === "radio" ? "radio" : "check";
+    body += `<div class="opts" id="opts">` + q.options.map(o => {
+      const on = sel.has(o);
+      return `<div class="opt ${cls} ${on?'sel':''}" data-v="${esc(o)}" onclick="toggle('${q.key}','${q.type}','${esc(o)}',${q.cap||0})"><span class="mark">${CHECK}</span>${o}</div>`;
+    }).join("") + `</div>`;
+    if(q.cap) body += `<div class="cap-note" id="capnote">${(sel.size)}/${q.cap} selected</div>`;
+  }
+
+  if(q.slider){
+    const v = a.slider ?? q.slider.def;
+    body += `<div class="slider-wrap"><span class="field-label">${q.slider.label}</span>
+      <div class="slider-labels"><span>${q.slider.left}</span><span>${q.slider.right}</span></div>
+      <input type="range" min="0" max="100" value="${v}" oninput="setVal('${q.key}','slider',this.value)"></div>`;
+  }
+
+  if(q.select){
+    const v = a.select || "";
+    body += `<span class="field-label">${q.select.label}</span><select onchange="setVal('${q.key}','select',this.value)">
+      <option value="" ${v?'':'selected'} disabled>Choose one…</option>
+      ${q.select.options.map(o=>`<option ${v===o?'selected':''}>${o}</option>`).join("")}</select>`;
+  }
+
+  ["text","text2","text3"].forEach(t=>{
+    if(q[t]) body += `<span class="field-label">${q[t].label}</span>
+      <textarea placeholder="${esc(q[t].ph)}" oninput="setVal('${q.key}','${t}',this.value)">${esc(a[t]||"")}</textarea>`;
+  });
+
+  stage.innerHTML = `
+    <div class="step">
+      <div class="progress">
+        <span class="count">No.&nbsp;${String(idx+1).padStart(2,'0')} / ${String(QUESTIONS.length).padStart(2,'0')}</span>
+        <div class="track"><div class="bar" style="width:${((idx)/(QUESTIONS.length))*100}%"></div></div>
+      </div>
+      <div class="q-eyebrow">${q.eyebrow}</div>
+      <h2 class="q-title">${q.title}</h2>
+      <p class="q-help">${q.help}</p>
+      <div class="q-body">${body}</div>
+      <div class="nav">
+        <button class="btn btn-ghost" onclick="prev()">← Back</button>
+        <button class="btn btn-primary" onclick="next()">${idx === QUESTIONS.length-1 ? 'See the Brief →' : 'Next →'}</button>
+      </div>
+    </div>`;
+}
+
+function ensure(key){ if(!answers[key]) answers[key] = {}; return answers[key]; }
+
+function toggle(key,type,val,cap){
+  const a = ensure(key);
+  let set = new Set(a.choices || []);
+  if(type === "radio"){ set = new Set([val]); }
+  else {
+    if(set.has(val)) set.delete(val);
+    else { if(cap && set.size >= cap) return; set.add(val); }
+  }
+  a.choices = [...set];
+  document.querySelectorAll('#opts .opt').forEach(el=>{
+    el.classList.toggle('sel', set.has(el.dataset.v));
+  });
+  const cn = document.getElementById('capnote');
+  if(cn) cn.textContent = `${set.size}/${cap} selected`;
+}
+function setVal(key,field,val){ ensure(key)[field] = val; }
+
+function next(){ idx++; window.scrollTo({top:0,behavior:'smooth'}); render(); }
+function prev(){ idx--; window.scrollTo({top:0,behavior:'smooth'}); render(); }
+
+function renderSummary(){
+  const rows = QUESTIONS.map(q=>{
+    const a = answers[q.key] || {};
+    let html = "";
+    if(a.choices && a.choices.length) html += a.choices.map(c=>`<span class="pill">${c}</span>`).join("");
+    if(a.slider !== undefined && q.slider){
+      const pct = a.slider; const word = pct < 40 ? q.slider.left : pct > 60 ? q.slider.right : "Balanced";
+      html += `<div style="margin-top:8px"><span class="pill">${q.slider.label}: ${word} (${pct}%)</span></div>`;
+    }
+    if(a.select) html += `<div style="margin-top:8px"><span class="pill">${a.select}</span></div>`;
+    ["text","text2","text3"].forEach(t=>{
+      if(a[t] && a[t].trim()) html += `<div style="margin-top:10px"><em style="font-style:normal;color:var(--ink-soft);font-size:13px">${q[t].label}</em><br>${esc(a[t])}</div>`;
+    });
+    if(!html.trim()) html = `<span class="empty">— not yet answered —</span>`;
+    return `<div class="row"><h4>${q.eyebrow.replace(/—.*$/, '').trim()} · ${stripNo(q.title)}</h4><div class="ans">${html}</div></div>`;
+  }).join("");
+
+  stage.innerHTML = `
+    <div class="step">
+      <div class="brief-head">
+        <h1 class="display">The Discovery <em>Brief</em></h1>
+        <p class="brief-sub">Girl at the Garden Gate · 90-Day Social Strategy Inputs</p>
+      </div>
+      <div class="brief">${rows}</div>
+      <div class="sendbox">
+        <label class="field-label" for="respName">Filled out by (name &amp; role)</label>
+        <input id="respName" type="text" placeholder="e.g. The Girl at the Garden Gate herself" />
+        <button class="btn btn-primary" id="sendBtn" onclick="submitBrief()" style="margin-top:16px;width:100%">Send Answers to Sal →</button>
+        <div class="send-status" id="sendStatus"></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="copyBrief()">Copy</button>
+        <button class="btn btn-ghost" onclick="downloadBrief()">Download .txt</button>
+        <button class="btn btn-ghost" onclick="window.print()">Print / PDF</button>
+        <button class="btn btn-ghost" onclick="idx=0;render()">Edit Answers</button>
+      </div>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function stripNo(s){ const clean = s.replace(/—.*/,'').replace(/[?.]$/,'').trim(); return clean.slice(0,46) + (clean.length>46?'…':''); }
+
+function briefText(){
+  let out = "GIRL AT THE GARDEN GATE × eaturmood\n90-Day Social Strategy — Discovery Brief\n" + "=".repeat(48) + "\n\n";
+  QUESTIONS.forEach((q,i)=>{
+    const a = answers[q.key] || {};
+    out += `${String(i+1).padStart(2,'0')}. ${stripTags(q.title)}\n`;
+    if(a.choices) a.choices.forEach(c=>out += `   • ${stripTags(c)}\n`);
+    if(a.slider!==undefined && q.slider){ const p=a.slider; const w=p<40?q.slider.left:p>60?q.slider.right:"Balanced"; out+=`   • ${q.slider.label}: ${w} (${p}%)\n`; }
+    if(a.select) out += `   • ${a.select}\n`;
+    ["text","text2","text3"].forEach(t=>{ if(a[t]&&a[t].trim()) out += `   ${stripTags(q[t].label)}: ${a[t].trim()}\n`; });
+    out += "\n";
+  });
+  out += "=".repeat(48) + "\nNext step: translate into a 90-day calendar, built in two 45-day chapters.\n";
+  return out;
+}
+function stripTags(s){ return String(s).replace(/&amp;/g,"&").replace(/<[^>]*>/g,""); }
+
+function copyBrief(){
+  navigator.clipboard.writeText(briefText()).then(()=>showToast("Brief copied to clipboard")).catch(()=>showToast("Copy failed — try Download"));
+}
+function downloadBrief(){
+  const blob = new Blob([briefText()],{type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "GardenGate-Discovery-Brief.txt"; a.click();
+  URL.revokeObjectURL(url); showToast("Downloaded");
+}
+function showToast(msg){
+  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+async function submitBrief(){
+  const btn = document.getElementById("sendBtn");
+  const status = document.getElementById("sendStatus");
+  if(FORMSPREE_ENDPOINT.indexOf("YOUR_FORM_ID") !== -1){
+    status.className = "send-status err";
+    status.innerHTML = "Setup needed: paste your Formspree endpoint into the file before this can send. (Use Download .txt for now.)";
+    return;
+  }
+  const payload = { _subject: "Girl at the Garden Gate × eaturmood — new discovery submission" };
+  const who = (document.getElementById("respName")||{}).value || "";
+  if(who.trim()) payload["Filled out by"] = who.trim();
+  QUESTIONS.forEach((q,i)=>{
+    const a = answers[q.key] || {}; const parts = [];
+    if(a.choices) a.choices.forEach(c=>parts.push(stripTags(c)));
+    if(a.slider!==undefined && q.slider){ const p=a.slider; const w=p<40?q.slider.left:p>60?q.slider.right:"Balanced"; parts.push(q.slider.label+": "+w+" ("+p+"%)"); }
+    if(a.select) parts.push(a.select);
+    ["text","text2","text3"].forEach(t=>{ if(a[t]&&a[t].trim()) parts.push(stripTags(q[t].label)+" — "+a[t].trim()); });
+    payload[String(i+1).padStart(2,"0")+". "+stripTags(q.title)] = parts.length ? parts.join("  |  ") : "(blank)";
+  });
+  payload["— FULL BRIEF —"] = briefText();
+
+  btn.disabled = true; btn.textContent = "Sending…";
+  status.className = "send-status"; status.textContent = "";
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      status.className = "send-status ok";
+      status.innerHTML = "Sent — thank you. Your answers are on their way to Sal.";
+      btn.textContent = "Sent ✓";
+    } else { throw new Error("bad"); }
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Send Answers to Sal →";
+    status.className = "send-status err";
+    status.innerHTML = "Couldn't send automatically. Please tap <b>Download .txt</b> below and email the file to Sal.";
+  }
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+render();
+</script>
+</body>
+</html>
