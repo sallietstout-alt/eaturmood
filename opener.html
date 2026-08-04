@@ -515,6 +515,17 @@ if (craving) {
     });
   }
 }
+/* auto-height: report content height to the Framer parent so the embed fits any screen */
+(function(){
+  function postH(){
+    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    parent.postMessage({ eumHeight: h }, '*');
+  }
+  window.addEventListener('load', postH);
+  window.addEventListener('resize', postH);
+  if (window.ResizeObserver) new ResizeObserver(postH).observe(document.body);
+  setTimeout(postH, 400); setTimeout(postH, 1200);
+})();
 </script>
 </body>
 </html>
