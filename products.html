@@ -235,12 +235,12 @@ if (played && played.catch) played.catch(useStills);
 setTimeout(function(){ if (cart.paused || cart.currentTime === 0) useStills(); }, 1200);
 
 /* ---------- the book ---------- */
-const OPENER_LINES = [
-  "These are the pieces that made the cut.",
-  "I started my career as a stylist and I&rsquo;ve been hunting ever since &mdash; for the one piece in the room worth looking at twice."
-];
-const PAGES = ["005055125500.webp","679988a778a8.webp","e600a0b33f32.webp","8412d13a84c3.webp","7e4ef6323bb0.webp","41f1bc4ed718.webp","860cf32dc18d.webp","a3a26e7c00f4.webp","6ec46b9db551.webp"];
+const PAGES = ["278446c7fbcb.webp","005055125500.webp","679988a778a8.webp","e600a0b33f32.webp","8412d13a84c3.webp","7e4ef6323bb0.webp","41f1bc4ed718.webp","860cf32dc18d.webp","a3a26e7c00f4.webp","6ec46b9db551.webp"];
 
+/* the loaf opens the book and carries its own description; the rest of the
+   pages only load once someone actually starts turning */
+const ALTS = {"278446c7fbcb.webp":
+  "A scored loaf on a paper doily on a silver tray, spelled out in pasta letters: you have great taste"};
 const book = document.getElementById('book');
 const leafEls = [];
 function addLeaf(inner){
@@ -251,14 +251,10 @@ function addLeaf(inner){
   leafEls.push(leaf);
 }
 
-addLeaf('<div class="face front said">' +
-          '<p class="eyebrow">The Goods</p>' +
-          OPENER_LINES.map(l => '<p>' + l + '</p>').join('') +
-          '<div class="sign">EatUrMood</div>' +
-        '</div><div class="face back"></div>');
-
-PAGES.forEach(src => addLeaf(
-  '<div class="face front"><img src="' + src + '" alt="A curated set of pieces" decoding="async"></div>' +
+PAGES.forEach((src, i) => addLeaf(
+  '<div class="face front"><img src="' + src + '" alt="' +
+    (ALTS[src] || 'A curated set of pieces') + '"' +
+    (i === 0 ? '' : ' loading="lazy"') + ' decoding="async"></div>' +
   '<div class="face back"></div>'));
 
 const total = leafEls.length;
@@ -270,7 +266,7 @@ function paint(){
     el.style.zIndex = turned ? i : (total - i);
   });
   document.getElementById('counter').textContent =
-    at === 0 ? 'Open' : (at >= total ? 'The end' : at + ' of ' + (total - 1));
+    at === 0 ? 'Open' : (at >= total ? 'The end' : at + ' of ' + total);
   document.getElementById('bprev').disabled = at === 0;
   document.getElementById('bnext').disabled = at >= total;
 }
