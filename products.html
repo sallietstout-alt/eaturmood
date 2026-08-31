@@ -10,9 +10,8 @@
   --gold:#C4974A; --paper:#EDE3D2; --margin:clamp(20px,6vw,110px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--ground,#2F1B10);transition:background-color 700ms ease;color:var(--ink);font-family:"Jost",system-ui,sans-serif;
-  min-height:100svh;overflow-x:hidden;
-  transition:background-color 700ms ease}
+body{background:var(--ground,#2F1B10);color:var(--ink);font-family:"Jost",system-ui,sans-serif;
+  min-height:100svh;overflow-x:hidden}
 img,video{display:block;max-width:100%}
 
 .top{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;
@@ -25,7 +24,7 @@ img,video{display:block;max-width:100%}
 /* ---------- the cart rolls into night ---------- */
 .trip{position:fixed;inset:0;z-index:10;display:grid;place-items:center;
   background:var(--ground,#2F1B10);
-  transition:opacity 1600ms ease, background-color 700ms ease}
+  transition:opacity 1600ms ease}
 .trip.gone{opacity:0;pointer-events:none}
 .trip video,.trip .still,.trip .hold{width:100%;height:100%;object-fit:contain}
 .trip .still,.trip .hold{position:absolute;inset:0;opacity:0;transition:opacity 1400ms ease}
@@ -151,41 +150,64 @@ h1,h2,h3,.hero h1,.title h1,.headline,.face.said p,.note .place,.intro h2,.cours
 
 <script>
 /* ---------- arrival ----------
-   The cart is an mp4 now. The page still takes the colour of whichever frame is
-   showing, read off the video's own clock, so the ground never drifts out of step.
-   If the video will not autoplay — iOS in low power, mostly — the same four
-   photographs carry the sequence instead. */
-var GROUNDS = ["#2F1B10", "#C3B866", "#522836", "#2F1B10"];
-var CHROME  = ["rgba(246,240,228,.62)", "rgba(60,48,28,.72)", "rgba(246,240,228,.62)", "rgba(246,240,228,.62)"];
-var CUES    = [0, 1.5, 3.0, 4.5];
+   The cart is a real piece of footage now: three interpolated clips joined into
+   one, so the ground colour ramps continuously rather than cutting between four
+   flat states. The page reads that ramp off a table sampled from the film itself
+   and follows it frame by frame, which keeps the letterbox the same colour as the
+   backdrop at every moment. The header flips light or dark on the ramp's own
+   luminance. If the video will not autoplay — iOS in low power, mostly — the four
+   source stills carry the sequence instead. */
+var RAMP = [
+  [0.00,  49, 28, 16], [0.60,  63, 44, 30], [1.00, 102, 91, 69],
+  [1.46, 147,143,106], [2.33, 196,185,107], [2.96, 141,140, 90],
+  [3.50, 103, 77, 68], [3.75,  90, 49, 60], [5.62,  83, 42, 54],
+  [6.00,  67, 37, 41], [6.33,  52, 29, 23], [7.05,  49, 28, 16]
+];
 
 var trip = document.getElementById('trip');
 var cart = document.getElementById('cart');
 function on(id){ document.getElementById(id).classList.add('on'); }
 function off(id){ document.getElementById(id).classList.remove('on'); }
 
-var shown = -1;
-function tint(i){
-  if (i === shown) return;
-  shown = i;
-  document.body.style.setProperty('--ground', GROUNDS[i]);
-  document.body.style.setProperty('--chrome', CHROME[i]);
+function groundAt(t){
+  if (t <= RAMP[0][0]) return RAMP[0].slice(1);
+  for (var i = 1; i < RAMP.length; i++) {
+    if (t <= RAMP[i][0]) {
+      var a = RAMP[i-1], b = RAMP[i];
+      var f = (t - a[0]) / (b[0] - a[0]);
+      return [1,2,3].map(function(k){ return Math.round(a[k] + (b[k] - a[k]) * f); });
+    }
+  }
+  return RAMP[RAMP.length-1].slice(1);
 }
-tint(0);
+
+function tintAt(t){
+  var c = groundAt(t);
+  document.body.style.setProperty('--ground', 'rgb(' + c.join(',') + ')');
+  /* the olive stretch is bright enough that cream type disappears on it */
+  var lum = (c[0]*0.299 + c[1]*0.587 + c[2]*0.114);
+  document.body.style.setProperty('--chrome',
+    lum > 120 ? 'rgba(60,48,28,.72)' : 'rgba(246,240,228,.62)');
+}
+tintAt(0);
 
 /* the room and the book arrive on their own clock, whichever way the cart plays */
 setTimeout(function(){ on('room'); }, 6100);
 setTimeout(function(){ trip.classList.add('gone'); }, 7000);
 setTimeout(function(){ on('stagewrap'); on('foot'); }, 7900);
 
-cart.addEventListener('timeupdate', function(){
-  var i = 0;
-  for (var k = 0; k < CUES.length; k++) if (cart.currentTime >= CUES[k]) i = k;
-  tint(i);
-});
+/* timeupdate only fires a few times a second, which reads as steps on a slow
+   ramp — follow the clock on every frame instead while the film is running */
+var following = false;
+function follow(){
+  if (cart.paused || cart.ended) { following = false; return; }
+  tintAt(cart.currentTime);
+  requestAnimationFrame(follow);
+}
 
 var settled = false;
 function useVideo(){
+  if (!following) { following = true; requestAnimationFrame(follow); }
   if (settled) return; settled = true;
   trip.classList.add('playing');
 }
@@ -195,14 +217,15 @@ function useStills(){
     var im = document.getElementById('f' + i);
     if (im && im.dataset.src) im.src = im.dataset.src;
   });
+  var STOPS = [0, 2.39, 4.96, 6.60];
   var frame = 0;
   var beat = setInterval(function(){
     var next = frame + 1;
-    if (next >= GROUNDS.length) { clearInterval(beat); return; }
-    tint(next);
+    if (next >= STOPS.length) { clearInterval(beat); return; }
+    tintAt(STOPS[next]);
     on('f' + next); off('f' + frame);
     frame = next;
-  }, 1500);
+  }, 1700);
 }
 
 cart.addEventListener('playing', useVideo);
