@@ -10,23 +10,22 @@
   --gold:#C4974A; --paper:#EDE3D2; --margin:clamp(20px,6vw,110px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--cream);color:var(--ink);font-family:"Jost",system-ui,sans-serif;
+body{background:var(--ground,#2F1B10);transition:background-color 700ms ease;color:var(--ink);font-family:"Jost",system-ui,sans-serif;
   min-height:100svh;overflow-x:hidden;
-  transition:background-color 2600ms cubic-bezier(.4,0,.2,1)}
-body.night{background:var(--night)}
+  transition:background-color 700ms ease}
 img,video{display:block;max-width:100%}
 
 .top{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;
   justify-content:space-between;align-items:center;padding:18px var(--margin);
   font-family:"Jost",system-ui,sans-serif;font-size:10.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:rgba(60,40,30,.55);transition:color 1800ms ease}
-body.night .top{color:var(--dim)}
+  text-transform:uppercase;color:var(--chrome,rgba(60,40,30,.55));transition:color 1800ms ease}
 .top a{color:inherit;text-decoration:none}
 .top a:hover{color:var(--gold)}
 
 /* ---------- the cart rolls into night ---------- */
 .trip{position:fixed;inset:0;z-index:10;display:grid;place-items:center;
-  transition:opacity 1600ms ease}
+  background:var(--ground,#2F1B10);
+  transition:opacity 1600ms ease, background-color 700ms ease}
 .trip.gone{opacity:0;pointer-events:none}
 .trip video,.trip .still,.trip .hold{width:100%;height:100%;object-fit:contain}
 .trip .still,.trip .hold{position:absolute;inset:0;opacity:0;transition:opacity 1400ms ease}
@@ -102,6 +101,15 @@ body.night .top{color:var(--dim)}
 
 /* display type matches the portfolio: Bodoni Moda */
 h1,h2,h3,.hero h1,.title h1,.headline,.face.said p,.note .place,.intro h2,.course h2,.card h3{font-family:"Bodoni Moda",serif}
+
+/* ---- the cravings cart, told in four frames ---- */
+.trip video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.trip.playing .frame{display:none}
+.trip .frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  opacity:0;transform:scale(1.012);
+  transition:opacity 900ms ease,transform 2600ms cubic-bezier(.22,1,.36,1)}
+.trip .frame.on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.trip .frame{transition-duration:1ms}}
 </style>
 
 <header class="top">
@@ -112,13 +120,13 @@ h1,h2,h3,.hero h1,.title h1,.headline,.face.said p,.note .place,.intro h2,.cours
 <div class="room" id="room"><img src="868ab497e9dd.webp" alt=""></div>
 
 <div class="trip" id="trip">
-  <video id="cart" autoplay muted playsinline preload="auto" poster="16081c475590.webp">
-    <source src="cart.mp4" type="video/mp4">
+  <video id="cart" autoplay muted playsinline preload="auto" poster="6713a2988461.webp">
+    <source src="cravings-cart.mp4" type="video/mp4">
   </video>
-  <img class="still" id="s1" src="16081c475590.webp" alt="A gold drinks cart carrying a silver cloche" loading="lazy" decoding="async">
-  <img class="still" id="s2" src="fa01b9cdb078.webp" alt="" loading="lazy" decoding="async">
-  <img class="still" id="s3" src="0ad6999179b8.webp" alt="" loading="lazy" decoding="async">
-  <img class="hold"  id="hold" src="0ad6999179b8.webp" alt="" loading="lazy" decoding="async">
+  <img class="frame on" id="f0" src="6713a2988461.webp" alt="A gold drinks cart carrying a silver cloche, a scalloped clutch and leopard slingbacks" decoding="async" fetchpriority="high">
+  <img class="frame" id="f1" data-src="54ac3bc8a7e6.webp" alt="The cart again, now with a tooled leather bag" decoding="async">
+  <img class="frame" id="f2" data-src="66fbd87c898a.webp" alt="The cart with green etched glasses, a pink jewelled ring and a studded pouch" decoding="async">
+  <img class="frame" id="f3" data-src="b308d4e2f22b.webp" alt="The cart with zebra boots, a turquoise shell and the tooled bag" decoding="async">
 </div>
 
 
@@ -143,31 +151,65 @@ h1,h2,h3,.hero h1,.title h1,.headline,.face.said p,.note .place,.intro h2,.cours
 
 <script>
 /* ---------- arrival ----------
-   The timeline runs on its own clock so it can never stall waiting on the video.
-   If the video won't play, three stills carry the same journey. */
-const cart = document.getElementById('cart');
-const trip = document.getElementById('trip');
-const on   = id => document.getElementById(id).classList.add('on');
-const off  = id => document.getElementById(id).classList.remove('on');
+   The cart is an mp4 now. The page still takes the colour of whichever frame is
+   showing, read off the video's own clock, so the ground never drifts out of step.
+   If the video will not autoplay — iOS in low power, mostly — the same four
+   photographs carry the sequence instead. */
+var GROUNDS = ["#2F1B10", "#C3B866", "#522836", "#2F1B10"];
+var CHROME  = ["rgba(246,240,228,.62)", "rgba(60,48,28,.72)", "rgba(246,240,228,.62)", "rgba(246,240,228,.62)"];
+var CUES    = [0, 1.5, 3.0, 4.5];
 
-setTimeout(() => document.body.classList.add('night'), 1700);
-setTimeout(() => on('hold'), 5000);
-setTimeout(() => on('room'), 5800);
-setTimeout(() => trip.classList.add('gone'), 7000);
-setTimeout(() => { on('stagewrap'); on('foot'); }, 7900);
+var trip = document.getElementById('trip');
+var cart = document.getElementById('cart');
+function on(id){ document.getElementById(id).classList.add('on'); }
+function off(id){ document.getElementById(id).classList.remove('on'); }
 
-let fallen = false;
-function useStills(){
-  if (fallen) return; fallen = true;
-  trip.classList.add('fallback');
-  on('s1');
-  setTimeout(() => { on('s2'); off('s1'); }, 1700);
-  setTimeout(() => { on('s3'); off('s2'); }, 3400);
+var shown = -1;
+function tint(i){
+  if (i === shown) return;
+  shown = i;
+  document.body.style.setProperty('--ground', GROUNDS[i]);
+  document.body.style.setProperty('--chrome', CHROME[i]);
 }
+tint(0);
+
+/* the room and the book arrive on their own clock, whichever way the cart plays */
+setTimeout(function(){ on('room'); }, 6100);
+setTimeout(function(){ trip.classList.add('gone'); }, 7000);
+setTimeout(function(){ on('stagewrap'); on('foot'); }, 7900);
+
+cart.addEventListener('timeupdate', function(){
+  var i = 0;
+  for (var k = 0; k < CUES.length; k++) if (cart.currentTime >= CUES[k]) i = k;
+  tint(i);
+});
+
+var settled = false;
+function useVideo(){
+  if (settled) return; settled = true;
+  trip.classList.add('playing');
+}
+function useStills(){
+  if (settled) return; settled = true;
+  [1,2,3].forEach(function(i){
+    var im = document.getElementById('f' + i);
+    if (im && im.dataset.src) im.src = im.dataset.src;
+  });
+  var frame = 0;
+  var beat = setInterval(function(){
+    var next = frame + 1;
+    if (next >= GROUNDS.length) { clearInterval(beat); return; }
+    tint(next);
+    on('f' + next); off('f' + frame);
+    frame = next;
+  }, 1500);
+}
+
+cart.addEventListener('playing', useVideo);
 cart.addEventListener('error', useStills);
-const played = cart.play();
+var played = cart.play();
 if (played && played.catch) played.catch(useStills);
-setTimeout(() => { if (cart.paused || cart.currentTime === 0) useStills(); }, 1400);
+setTimeout(function(){ if (cart.paused || cart.currentTime === 0) useStills(); }, 1200);
 
 /* ---------- the book ---------- */
 const OPENER_LINES = [
@@ -193,7 +235,7 @@ addLeaf('<div class="face front said">' +
         '</div><div class="face back"></div>');
 
 PAGES.forEach(src => addLeaf(
-  '<div class="face front"><img src="' + src + '" alt="A curated set of pieces" loading="lazy" decoding="async"></div>' +
+  '<div class="face front"><img src="' + src + '" alt="A curated set of pieces" decoding="async"></div>' +
   '<div class="face back"></div>'));
 
 const total = leafEls.length;
