@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inquire — EatUrMood</title>
+<meta name="description" content="Six questions to find the right service. Styling and Creative Direction for brands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400;1,6..96,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--brown:#2F1B10;--cream:#F5EFE0;--gold:#C4974A;--plum:#3D1A2C;--red:#B83226}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--brown)}
+body{color:var(--cream);font-family:'Jost',system-ui,sans-serif;font-weight:300;line-height:1.6}
+.wrap{max-width:660px;margin:0 auto;padding:56px 22px 90px}
+
+.back{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.5);text-decoration:none}
+.back:hover{color:var(--gold)}
+
+h1{font-family:'Bodoni Moda',serif;font-weight:400;font-style:italic;
+  font-size:clamp(30px,6vw,50px);line-height:1.08;margin:26px 0 12px}
+.lede{font-size:16px;color:rgba(245,239,224,.72);margin:0 0 8px;max-width:46ch}
+.count{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.4);margin:34px 0 0}
+
+.q{border-top:1px solid rgba(245,239,224,.14);padding:26px 0 4px}
+.q h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:20px;margin:0 0 16px;line-height:1.35}
+label.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;margin:0 0 8px;
+  border:1px solid rgba(245,239,224,.18);cursor:pointer;transition:border-color .2s,background .2s;font-size:15px}
+label.opt:hover{border-color:rgba(196,151,74,.6);background:rgba(196,151,74,.06)}
+label.opt input{margin-top:4px;accent-color:var(--gold);flex-shrink:0}
+label.opt:has(input:checked){border-color:var(--gold);background:rgba(196,151,74,.12)}
+
+.fields{border-top:1px solid rgba(245,239,224,.14);padding:26px 0 0;margin-top:6px}
+.fields h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:20px;margin:0 0 18px}
+.row{margin:0 0 16px}
+.row label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(245,239,224,.55);margin:0 0 7px}
+input[type=text],input[type=email],textarea,select{width:100%;background:rgba(245,239,224,.06);
+  border:1px solid rgba(245,239,224,.22);color:var(--cream);font-family:'Jost';font-size:15px;
+  font-weight:300;padding:12px 14px;border-radius:0}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
+textarea{min-height:110px;resize:vertical}
+select option{background:var(--brown)}
+
+.err{color:#F09595;font-size:13px;margin:10px 0 0;display:none}
+
+button{font-family:'Jost';font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--gold);color:var(--brown);border:none;padding:16px 30px;cursor:pointer;
+  transition:opacity .2s;width:100%;margin-top:8px}
+button:hover{opacity:.88}
+button.ghost{background:none;color:var(--cream);border:1px solid rgba(245,239,224,.35);margin-top:12px}
+
+.result{border:1px solid var(--gold);padding:26px;margin:30px 0 0;display:none}
+.result .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.result h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:26px;margin:10px 0 10px}
+.result p{margin:0 0 8px;font-size:15px;color:rgba(245,239,224,.82)}
+
+.sent{display:none;text-align:center;padding:50px 0}
+.sent h2{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500;font-size:30px;margin:0 0 10px}
+
+footer{border-top:1px solid rgba(245,239,224,.14);margin-top:46px;padding-top:20px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.32);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="index.html">&larr; The tray</a>
+
+<div id="form-area">
+  <h1>What are you working on?</h1>
+  <p class="lede">Six questions. At the end you'll know which service fits, and I'll have what I need to answer properly.</p>
+  <p class="count" id="count">0 of 6 answered</p>
+
+  <form id="quiz" action="https://formspree.io/f/mzdnowea" method="POST">
+
+    <div class="q">
+      <h2>1. Are you dressing your home, yourself, or a client's project?</h2>
+      <label class="opt"><input type="radio" name="q1" value="My home" data-s="1"><span>My home</span></label>
+      <label class="opt"><input type="radio" name="q1" value="Myself — wardrobe" data-s="1"><span>Myself — wardrobe or a personal shoot</span></label>
+      <label class="opt"><input type="radio" name="q1" value="A client's project" data-s="1"><span>A client's project — I'm a designer, agent or firm</span></label>
+      <label class="opt"><input type="radio" name="q1" value="A brand, not a space" data-c="2"><span>A brand, not a space</span></label>
+    </div>
+
+    <div class="q">
+      <h2>2. What do you need to exist at the end of it?</h2>
+      <label class="opt"><input type="radio" name="q2" value="A finished room" data-s="2"><span>A finished room or set</span></label>
+      <label class="opt"><input type="radio" name="q2" value="Photographs" data-c="2"><span>Photographs or film</span></label>
+      <label class="opt"><input type="radio" name="q2" value="Both" data-s="1" data-c="1"><span>Both — the space and the images of it</span></label>
+      <label class="opt"><input type="radio" name="q2" value="Not sure yet" data-c="1"><span>Not sure yet</span></label>
+    </div>
+
+    <div class="q">
+      <h2>3. Is there an install day, a shoot day, or an event on the calendar?</h2>
+      <label class="opt"><input type="radio" name="q3" value="Install day" data-s="2"><span>Install day — I need hands on site</span></label>
+      <label class="opt"><input type="radio" name="q3" value="Shoot day" data-c="2"><span>Shoot day — I need someone directing it</span></label>
+      <label class="opt"><input type="radio" name="q3" value="Both, same day" data-s="1" data-c="1"><span>Both, and they're the same day</span></label>
+      <label class="opt"><input type="radio" name="q3" value="Nothing scheduled" data-c="1"><span>Nothing scheduled — still figuring it out</span></label>
+    </div>
+
+    <div class="q">
+      <h2>4. What's actually missing right now?</h2>
+      <label class="opt"><input type="radio" name="q4" value="Hands" data-s="2"><span>Hands — someone to source, prep and set it</span></label>
+      <label class="opt"><input type="radio" name="q4" value="An eye" data-c="2"><span>An eye — someone to decide how it should look</span></label>
+      <label class="opt"><input type="radio" name="q4" value="Content" data-c="2"><span>Content — I have the work, not the footage</span></label>
+      <label class="opt"><input type="radio" name="q4" value="All of it" data-s="1" data-c="1"><span>All of it</span></label>
+    </div>
+
+    <div class="q">
+      <h2>5. Do you want behind-the-scenes content captured while it happens?</h2>
+      <label class="opt"><input type="radio" name="q5" value="Yes, BTS" data-c="2"><span>Yes — shot and cut same day</span></label>
+      <label class="opt"><input type="radio" name="q5" value="Maybe BTS" data-c="1"><span>Maybe, if it doesn't slow the install</span></label>
+      <label class="opt"><input type="radio" name="q5" value="No BTS" data-s="1"><span>No, just the room</span></label>
+      <label class="opt"><input type="radio" name="q5" value="BTS is the whole point" data-c="2"><span>The content is the whole point</span></label>
+    </div>
+
+    <div class="q">
+      <h2>6. When?</h2>
+      <label class="opt"><input type="radio" name="q6" value="Within 2 weeks" data-s="1"><span>Within two weeks</span></label>
+      <label class="opt"><input type="radio" name="q6" value="This month or next" data-s="1"><span>This month or next</span></label>
+      <label class="opt"><input type="radio" name="q6" value="A few months out" data-c="1"><span>A few months out</span></label>
+      <label class="opt"><input type="radio" name="q6" value="Ongoing" data-s="1" data-c="1"><span>Ongoing — I need someone regularly</span></label>
+    </div>
+
+    <div class="result" id="result">
+      <span class="tag">Your fit</span>
+      <h3 id="r-title"></h3>
+      <p id="r-body"></p>
+    </div>
+
+    <div class="fields">
+      <h2>Where should I send it?</h2>
+      <div class="row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name">
+      </div>
+      <div class="row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+      </div>
+      <div class="row">
+        <label for="brand">Brand, studio or firm</label>
+        <input type="text" id="brand" name="brand" autocomplete="organization">
+      </div>
+      <div class="row">
+        <label for="where">Where is the project?</label>
+        <input type="text" id="where" name="location">
+      </div>
+      <div class="row">
+        <label for="budget">Budget range</label>
+        <select id="budget" name="budget">
+          <option value="">Select one</option>
+          <option>Under $1,000</option>
+          <option>$1,000 – $2,500</option>
+          <option>$2,500 – $5,000</option>
+          <option>$5,000 – $10,000</option>
+          <option>$10,000+</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="notes">Anything else</label>
+        <textarea id="notes" name="notes"></textarea>
+      </div>
+    </div>
+
+    <input type="hidden" name="recommended_service" id="h-service">
+    <input type="hidden" name="quiz_answers" id="h-answers">
+    <input type="hidden" name="_subject" value="New inquiry from eaturmood.com">
+
+    <p class="err" id="err"></p>
+    <button type="submit" id="send">Send it to Sallie</button>
+    <button type="button" class="ghost" id="mailto">Or open this in my mail app</button>
+  </form>
+</div>
+
+<div class="sent" id="sent">
+  <h2>Got it.</h2>
+  <p>Your answers are on their way to hello@eaturmood.com. I'll come back to you within two business days.</p>
+  <a class="back" href="index.html">&larr; Back to the tray</a>
+</div>
+
+<footer>Sallie Townsend &middot; Santa Barbara &middot; hello@eaturmood.com</footer>
+</div>
+
+<script>
+const QS = ['q1','q2','q3','q4','q5','q6'];
+const form = document.getElementById('quiz');
+const result = document.getElementById('result');
+const err = document.getElementById('err');
+
+const COPY = {
+  styling: ["Styling",
+    "Sourcing, set styling and install-day support — for interiors or wardrobe. I stage and source; I'm not the designer of record, which is exactly what makes me useful on a firm's install day."],
+  creative: ["Creative",
+    "Direction, film and editing. Concept through cut, so the images and the story arrive together."],
+  both: ["Styling and Creative together",
+    "The room and the images of it, same engagement, same day where it makes sense — styled and set, then shot and cut."]
+};
+
+function score(){
+  let s = 0, c = 0, answered = 0;
+  const answers = [];
+  QS.forEach((q, i) => {
+    const el = form.querySelector(`input[name="${q}"]:checked`);
+    if (!el) return;
+    answered++;
+    s += Number(el.dataset.s || 0);
+    c += Number(el.dataset.c || 0);
+    answers.push(`${i+1}. ${el.value}`);
+  });
+  document.getElementById('count').textContent = answered + ' of 6 answered';
+  if (answered === 6){
+    const key = (s >= c + 2) ? 'styling' : (c >= s + 2) ? 'creative' : 'both';
+    document.getElementById('r-title').textContent = COPY[key][0];
+    document.getElementById('r-body').textContent = COPY[key][1];
+    result.style.display = 'block';
+    document.getElementById('h-service').value = COPY[key][0];
+    document.getElementById('h-answers').value = answers.join('\n');
+    err.style.display = 'none';
+  } else {
+    result.style.display = 'none';
+  }
+  return { answered, answers };
+}
+
+form.addEventListener('change', score);
+
+function validate(){
+  const { answered } = score();
+  const email = document.getElementById('email').value.trim();
+  if (answered < 6){ err.textContent = 'Answer all six questions first.'; err.style.display='block'; return false; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    err.textContent = 'Add an email address so I can reply.'; err.style.display='block'; return false;
+  }
+  err.style.display = 'none';
+  return true;
+}
+
+form.addEventListener('submit', e => {
+  if (!validate()){ e.preventDefault(); return; }
+});
+
+document.getElementById('mailto').addEventListener('click', () => {
+  if (!validate()) return;
+  const g = id => document.getElementById(id).value.trim();
+  const body =
+    `Name: ${g('name')}\nEmail: ${g('email')}\nBrand: ${g('brand')}\n` +
+    `Location: ${g('where')}\nBudget: ${g('budget')}\n\n` +
+    `Recommended: ${document.getElementById('h-service').value}\n\n` +
+    `Answers:\n${document.getElementById('h-answers').value}\n\nNotes:\n${g('notes')}`;
+  window.location.href = 'mailto:hello@eaturmood.com?subject=' +
+    encodeURIComponent('New inquiry from eaturmood.com') + '&body=' + encodeURIComponent(body);
+});
+
+if (location.search.includes('sent=1')){
+  document.getElementById('form-area').style.display = 'none';
+  document.getElementById('sent').style.display = 'block';
+}
+</script>
+</body>
+</html>
