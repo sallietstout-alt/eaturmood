@@ -15,7 +15,7 @@ html,body{margin:0;background:var(--cream);color:var(--brown)}
 body{font-family:'Jost',system-ui,sans-serif;font-weight:300;min-height:100svh;display:flex;flex-direction:column}
 a{color:inherit}
 .top{display:flex;justify-content:space-between;align-items:center;padding:22px 24px}
-.back{font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;opacity:.6}
+.back{font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.8}
 .back:hover{opacity:1}
 .bar{width:120px;height:2px;background:var(--line);position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--plum);transition:width .6s cubic-bezier(.2,.7,.3,1)}
@@ -26,30 +26,30 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 
 .step.on{display:block;animation:in .55s cubic-bezier(.2,.7,.3,1)}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-.kick{font-family:'Bodoni Moda',serif;font-style:italic;font-size:16px;margin:0 0 10px;color:rgba(44,26,14,.6)}
+.kick{font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px;color:rgba(44,26,14,.72)}
 h1,h2{font-family:'Bodoni Moda',serif;font-weight:400;line-height:1.05;margin:0 0 30px;color:var(--plum)}
 h1{font-size:clamp(40px,8vw,70px)}
 h2{font-size:clamp(32px,6vw,52px)}
-.lede{font-size:17px;line-height:1.6;max-width:44ch;margin:-14px 0 30px;color:rgba(44,26,14,.75)}
+.lede{font-size:18px;font-weight:400;line-height:1.6;max-width:44ch;margin:-14px 0 30px;color:rgba(44,26,14,.88)}
 
 .opts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .opts button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-align:left;
  background:none;border:0;border-bottom:1px solid var(--line);padding:20px 4px;cursor:pointer;color:var(--brown);
  font-family:'Bodoni Moda',serif;font-size:clamp(21px,3.4vw,28px);transition:color .3s,padding .4s cubic-bezier(.2,.7,.3,1)}
-.opts button small{font-family:'Jost';font-weight:300;font-size:14px;color:rgba(44,26,14,.55);text-align:right;max-width:24ch}
+.opts button small{font-family:'Jost';font-weight:400;font-size:15px;color:rgba(44,26,14,.72);text-align:right;max-width:24ch}
 .opts button:hover,.opts button:focus-visible{color:var(--plum);padding-left:14px;outline:none}
 .opts button:focus-visible{box-shadow:inset 3px 0 0 var(--plum)}
 
 .prev{margin:26px 0 0;background:none;border:0;padding:0;cursor:pointer;font-family:'Jost';font-size:13px;
- letter-spacing:.14em;text-transform:uppercase;color:rgba(44,26,14,.55)}
+ letter-spacing:.14em;text-transform:uppercase;color:rgba(44,26,14,.75);padding:10px 0}
 .prev:hover{color:var(--brown)}
 
 /* summary + form */
 .picked{margin:0 0 28px;padding:18px 20px;background:rgba(61,26,44,.06);border-left:2px solid var(--plum)}
-.picked p{margin:0;font-family:'Bodoni Moda',serif;font-size:19px;line-height:1.5}
-.picked span{display:block;font-family:'Jost';font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(44,26,14,.55);margin:0 0 6px}
+.picked p{margin:0;font-family:'Jost',sans-serif;font-weight:400;font-size:17px;line-height:1.55}
+.picked span{display:block;font-family:'Jost';font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(44,26,14,.75);margin:0 0 6px}
 form{display:grid;grid-template-columns:1fr 1fr;gap:18px 18px}
-label{display:flex;flex-direction:column;gap:7px;font-size:13px;letter-spacing:.08em;color:rgba(44,26,14,.7)}
+label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:400;letter-spacing:.06em;color:rgba(44,26,14,.85)}
 label.full{grid-column:1/-1}
 input,select,textarea{font:inherit;font-size:16px;color:var(--brown);background:transparent;border:0;border-bottom:1px solid rgba(44,26,14,.35);
  padding:9px 2px;border-radius:0;letter-spacing:0}
@@ -60,16 +60,18 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--plum)}
  font-family:'Jost';font-size:13px;letter-spacing:.18em;text-transform:uppercase;transition:background .3s}
 .send button:hover,.send button:focus-visible{background:var(--brown);outline:none}
 .send button[disabled]{opacity:.6;cursor:wait}
-.send a{font-size:14px;color:rgba(44,26,14,.65);text-underline-offset:4px}
+.send a{font-size:15px;color:rgba(44,26,14,.85);text-underline-offset:4px}
 .err{grid-column:1/-1;color:#B83226;font-size:14px;margin:0;min-height:1em}
 
-.done p{font-family:'Bodoni Moda',serif;font-size:20px;line-height:1.55;max-width:40ch}
-footer{text-align:center;font-size:12px;letter-spacing:.12em;color:rgba(44,26,14,.5);padding:0 20px 26px}
+.done p{font-family:'Jost',sans-serif;font-weight:400;font-size:18px;line-height:1.55;max-width:40ch}
+footer{text-align:center;font-size:12px;letter-spacing:.12em;color:rgba(44,26,14,.7);padding:0 20px 26px}
 
 @media(max-width:560px){
  form{grid-template-columns:1fr}
  .opts button{flex-direction:column;gap:4px}
  .opts button small{text-align:left}
+ .opts button{font-size:24px;padding:18px 4px}
+ h1{font-size:44px} h2{font-size:34px}
 }
 @media(prefers-reduced-motion:reduce){.step.on{animation:none}.opts button,.bar i{transition:none}}
 </style>
