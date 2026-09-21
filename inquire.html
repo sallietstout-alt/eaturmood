@@ -4,260 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Inquire — EatUrMood</title>
-<meta name="description" content="Six questions to find the right service. Styling and Creative Direction for brands.">
+<meta name="description" content="A few quick questions to find the right creative service: styling or branding. EatUrMood, Santa Barbara.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400;1,6..96,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root{--brown:#2F1B10;--cream:#F5EFE0;--gold:#C4974A;--plum:#3D1A2C;--red:#B83226}
+:root{--cream:#F5EFE0;--brown:#2C1A0E;--plum:#3D1A2C;--gold:#C4974A;--line:rgba(44,26,14,.16)}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--brown)}
-body{color:var(--cream);font-family:'Jost',system-ui,sans-serif;font-weight:300;line-height:1.6}
-.wrap{max-width:660px;margin:0 auto;padding:56px 22px 90px}
+html,body{margin:0;background:var(--cream);color:var(--brown)}
+body{font-family:'Jost',system-ui,sans-serif;font-weight:300;min-height:100svh;display:flex;flex-direction:column}
+a{color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 24px}
+.back{font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;opacity:.6}
+.back:hover{opacity:1}
+.bar{width:120px;height:2px;background:var(--line);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--plum);transition:width .6s cubic-bezier(.2,.7,.3,1)}
 
-.back{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.5);text-decoration:none}
-.back:hover{color:var(--gold)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 20px 60px}
+.stage{width:min(620px,100%)}
+.step{display:none}
+.step.on{display:block;animation:in .55s cubic-bezier(.2,.7,.3,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-h1{font-family:'Bodoni Moda',serif;font-weight:400;font-style:italic;
-  font-size:clamp(30px,6vw,50px);line-height:1.08;margin:26px 0 12px}
-.lede{font-size:16px;color:rgba(245,239,224,.72);margin:0 0 8px;max-width:46ch}
-.count{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.4);margin:34px 0 0}
+.kick{font-family:'Bodoni Moda',serif;font-style:italic;font-size:16px;margin:0 0 10px;color:rgba(44,26,14,.6)}
+h1,h2{font-family:'Bodoni Moda',serif;font-weight:400;line-height:1.05;margin:0 0 30px;color:var(--plum)}
+h1{font-size:clamp(40px,8vw,70px)}
+h2{font-size:clamp(32px,6vw,52px)}
+.lede{font-size:17px;line-height:1.6;max-width:44ch;margin:-14px 0 30px;color:rgba(44,26,14,.75)}
 
-.q{border-top:1px solid rgba(245,239,224,.14);padding:26px 0 4px}
-.q h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:20px;margin:0 0 16px;line-height:1.35}
-label.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;margin:0 0 8px;
-  border:1px solid rgba(245,239,224,.18);cursor:pointer;transition:border-color .2s,background .2s;font-size:15px}
-label.opt:hover{border-color:rgba(196,151,74,.6);background:rgba(196,151,74,.06)}
-label.opt input{margin-top:4px;accent-color:var(--gold);flex-shrink:0}
-label.opt:has(input:checked){border-color:var(--gold);background:rgba(196,151,74,.12)}
+.opts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.opts button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-align:left;
+ background:none;border:0;border-bottom:1px solid var(--line);padding:20px 4px;cursor:pointer;color:var(--brown);
+ font-family:'Bodoni Moda',serif;font-size:clamp(21px,3.4vw,28px);transition:color .3s,padding .4s cubic-bezier(.2,.7,.3,1)}
+.opts button small{font-family:'Jost';font-weight:300;font-size:14px;color:rgba(44,26,14,.55);text-align:right;max-width:24ch}
+.opts button:hover,.opts button:focus-visible{color:var(--plum);padding-left:14px;outline:none}
+.opts button:focus-visible{box-shadow:inset 3px 0 0 var(--plum)}
 
-.fields{border-top:1px solid rgba(245,239,224,.14);padding:26px 0 0;margin-top:6px}
-.fields h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:20px;margin:0 0 18px}
-.row{margin:0 0 16px}
-.row label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(245,239,224,.55);margin:0 0 7px}
-input[type=text],input[type=email],textarea,select{width:100%;background:rgba(245,239,224,.06);
-  border:1px solid rgba(245,239,224,.22);color:var(--cream);font-family:'Jost';font-size:15px;
-  font-weight:300;padding:12px 14px;border-radius:0}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
-textarea{min-height:110px;resize:vertical}
-select option{background:var(--brown)}
+.prev{margin:26px 0 0;background:none;border:0;padding:0;cursor:pointer;font-family:'Jost';font-size:13px;
+ letter-spacing:.14em;text-transform:uppercase;color:rgba(44,26,14,.55)}
+.prev:hover{color:var(--brown)}
 
-.err{color:#F09595;font-size:13px;margin:10px 0 0;display:none}
+/* summary + form */
+.picked{margin:0 0 28px;padding:18px 20px;background:rgba(61,26,44,.06);border-left:2px solid var(--plum)}
+.picked p{margin:0;font-family:'Bodoni Moda',serif;font-size:19px;line-height:1.5}
+.picked span{display:block;font-family:'Jost';font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(44,26,14,.55);margin:0 0 6px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px 18px}
+label{display:flex;flex-direction:column;gap:7px;font-size:13px;letter-spacing:.08em;color:rgba(44,26,14,.7)}
+label.full{grid-column:1/-1}
+input,select,textarea{font:inherit;font-size:16px;color:var(--brown);background:transparent;border:0;border-bottom:1px solid rgba(44,26,14,.35);
+ padding:9px 2px;border-radius:0;letter-spacing:0}
+textarea{min-height:92px;resize:vertical;border:1px solid rgba(44,26,14,.25);padding:10px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--plum)}
+.send{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:8px}
+.send button{background:var(--plum);color:var(--cream);border:0;padding:16px 28px;cursor:pointer;
+ font-family:'Jost';font-size:13px;letter-spacing:.18em;text-transform:uppercase;transition:background .3s}
+.send button:hover,.send button:focus-visible{background:var(--brown);outline:none}
+.send button[disabled]{opacity:.6;cursor:wait}
+.send a{font-size:14px;color:rgba(44,26,14,.65);text-underline-offset:4px}
+.err{grid-column:1/-1;color:#B83226;font-size:14px;margin:0;min-height:1em}
 
-button{font-family:'Jost';font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-  background:var(--gold);color:var(--brown);border:none;padding:16px 30px;cursor:pointer;
-  transition:opacity .2s;width:100%;margin-top:8px}
-button:hover{opacity:.88}
-button.ghost{background:none;color:var(--cream);border:1px solid rgba(245,239,224,.35);margin-top:12px}
+.done p{font-family:'Bodoni Moda',serif;font-size:20px;line-height:1.55;max-width:40ch}
+footer{text-align:center;font-size:12px;letter-spacing:.12em;color:rgba(44,26,14,.5);padding:0 20px 26px}
 
-.result{border:1px solid var(--gold);padding:26px;margin:30px 0 0;display:none}
-.result .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.result h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:26px;margin:10px 0 10px}
-.result p{margin:0 0 8px;font-size:15px;color:rgba(245,239,224,.82)}
-
-.sent{display:none;text-align:center;padding:50px 0}
-.sent h2{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500;font-size:30px;margin:0 0 10px}
-
-footer{border-top:1px solid rgba(245,239,224,.14);margin-top:46px;padding-top:20px;
-  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,224,.32);text-align:center}
+@media(max-width:560px){
+ form{grid-template-columns:1fr}
+ .opts button{flex-direction:column;gap:4px}
+ .opts button small{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){.step.on{animation:none}.opts button,.bar i{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<a class="back" href="index.html">&larr; The tray</a>
+<header class="top">
+  <a class="back" href="/index.html">&larr; The tray</a>
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+</header>
 
-<div id="form-area">
-  <h1>What are you working on?</h1>
-  <p class="lede">Six questions. At the end you'll know which service fits, and I'll have what I need to answer properly.</p>
-  <p class="count" id="count">0 of 6 answered</p>
+<main>
+  <div class="stage" id="stage" aria-live="polite"></div>
+</main>
 
-  <form id="quiz" action="https://formspree.io/f/mzdnowea" method="POST">
-
-    <div class="q">
-      <h2>1. Are you dressing your home, yourself, or a client's project?</h2>
-      <label class="opt"><input type="radio" name="q1" value="My home" data-s="1"><span>My home</span></label>
-      <label class="opt"><input type="radio" name="q1" value="Myself — wardrobe" data-s="1"><span>Myself — wardrobe or a personal shoot</span></label>
-      <label class="opt"><input type="radio" name="q1" value="A client's project" data-s="1"><span>A client's project — I'm a designer, agent or firm</span></label>
-      <label class="opt"><input type="radio" name="q1" value="A brand, not a space" data-c="2"><span>A brand, not a space</span></label>
-    </div>
-
-    <div class="q">
-      <h2>2. What do you need to exist at the end of it?</h2>
-      <label class="opt"><input type="radio" name="q2" value="A finished room" data-s="2"><span>A finished room or set</span></label>
-      <label class="opt"><input type="radio" name="q2" value="Photographs" data-c="2"><span>Photographs or film</span></label>
-      <label class="opt"><input type="radio" name="q2" value="Both" data-s="1" data-c="1"><span>Both — the space and the images of it</span></label>
-      <label class="opt"><input type="radio" name="q2" value="Not sure yet" data-c="1"><span>Not sure yet</span></label>
-    </div>
-
-    <div class="q">
-      <h2>3. Is there an install day, a shoot day, or an event on the calendar?</h2>
-      <label class="opt"><input type="radio" name="q3" value="Install day" data-s="2"><span>Install day — I need hands on site</span></label>
-      <label class="opt"><input type="radio" name="q3" value="Shoot day" data-c="2"><span>Shoot day — I need someone directing it</span></label>
-      <label class="opt"><input type="radio" name="q3" value="Both, same day" data-s="1" data-c="1"><span>Both, and they're the same day</span></label>
-      <label class="opt"><input type="radio" name="q3" value="Nothing scheduled" data-c="1"><span>Nothing scheduled — still figuring it out</span></label>
-    </div>
-
-    <div class="q">
-      <h2>4. What's actually missing right now?</h2>
-      <label class="opt"><input type="radio" name="q4" value="Hands" data-s="2"><span>Hands — someone to source, prep and set it</span></label>
-      <label class="opt"><input type="radio" name="q4" value="An eye" data-c="2"><span>An eye — someone to decide how it should look</span></label>
-      <label class="opt"><input type="radio" name="q4" value="Content" data-c="2"><span>Content — I have the work, not the footage</span></label>
-      <label class="opt"><input type="radio" name="q4" value="All of it" data-s="1" data-c="1"><span>All of it</span></label>
-    </div>
-
-    <div class="q">
-      <h2>5. Do you want behind-the-scenes content captured while it happens?</h2>
-      <label class="opt"><input type="radio" name="q5" value="Yes, BTS" data-c="2"><span>Yes — shot and cut same day</span></label>
-      <label class="opt"><input type="radio" name="q5" value="Maybe BTS" data-c="1"><span>Maybe, if it doesn't slow the install</span></label>
-      <label class="opt"><input type="radio" name="q5" value="No BTS" data-s="1"><span>No, just the room</span></label>
-      <label class="opt"><input type="radio" name="q5" value="BTS is the whole point" data-c="2"><span>The content is the whole point</span></label>
-    </div>
-
-    <div class="q">
-      <h2>6. When?</h2>
-      <label class="opt"><input type="radio" name="q6" value="Within 2 weeks" data-s="1"><span>Within two weeks</span></label>
-      <label class="opt"><input type="radio" name="q6" value="This month or next" data-s="1"><span>This month or next</span></label>
-      <label class="opt"><input type="radio" name="q6" value="A few months out" data-c="1"><span>A few months out</span></label>
-      <label class="opt"><input type="radio" name="q6" value="Ongoing" data-s="1" data-c="1"><span>Ongoing — I need someone regularly</span></label>
-    </div>
-
-    <div class="result" id="result">
-      <span class="tag">Your fit</span>
-      <h3 id="r-title"></h3>
-      <p id="r-body"></p>
-    </div>
-
-    <div class="fields">
-      <h2>Where should I send it?</h2>
-      <div class="row">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" autocomplete="name">
-      </div>
-      <div class="row">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" autocomplete="email">
-      </div>
-      <div class="row">
-        <label for="brand">Brand, studio or firm</label>
-        <input type="text" id="brand" name="brand" autocomplete="organization">
-      </div>
-      <div class="row">
-        <label for="where">Where is the project?</label>
-        <input type="text" id="where" name="location">
-      </div>
-      <div class="row">
-        <label for="budget">Budget range</label>
-        <select id="budget" name="budget">
-          <option value="">Select one</option>
-          <option>Under $1,000</option>
-          <option>$1,000 – $2,500</option>
-          <option>$2,500 – $5,000</option>
-          <option>$5,000 – $10,000</option>
-          <option>$10,000+</option>
-          <option>Not sure yet</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="notes">Anything else</label>
-        <textarea id="notes" name="notes"></textarea>
-      </div>
-    </div>
-
-    <input type="hidden" name="recommended_service" id="h-service">
-    <input type="hidden" name="quiz_answers" id="h-answers">
-    <input type="hidden" name="_subject" value="New inquiry from eaturmood.com">
-
-    <p class="err" id="err"></p>
-    <button type="submit" id="send">Send it to Sallie</button>
-    <button type="button" class="ghost" id="mailto">Or open this in my mail app</button>
-  </form>
-</div>
-
-<div class="sent" id="sent">
-  <h2>Got it.</h2>
-  <p>Your answers are on their way to hello@eaturmood.com. I'll come back to you within two business days.</p>
-  <a class="back" href="index.html">&larr; Back to the tray</a>
-</div>
-
-<footer>Sallie Townsend &middot; Santa Barbara &middot; hello@eaturmood.com</footer>
-</div>
+<footer>Sallie Townsend · Santa Barbara · hello@eaturmood.com</footer>
 
 <script>
-const QS = ['q1','q2','q3','q4','q5','q6'];
-const form = document.getElementById('quiz');
-const result = document.getElementById('result');
-const err = document.getElementById('err');
+/* ============ EDIT THE QUESTIONS HERE ============ */
+const FORMSPREE = 'https://formspree.io/f/mzdnowea';
 
-const COPY = {
-  styling: ["Styling",
-    "Sourcing, set styling and install-day support — for interiors or wardrobe. I stage and source; I'm not the designer of record, which is exactly what makes me useful on a firm's install day."],
-  creative: ["Creative",
-    "Direction, film and editing. Concept through cut, so the images and the story arrive together."],
-  both: ["Styling and Creative together",
-    "The room and the images of it, same engagement, same day where it makes sense — styled and set, then shot and cut."]
+const Q = {
+  start: { kick:'Creative services', title:'Why are you here?', h:'h1',
+    lede:'A few quick questions, then you can tell me about the project.',
+    opts:[
+      {t:'Styling',  s:'Rooms, tables, wardrobes', go:'styling'},
+      {t:'Branding', s:'Social, logo, editing',    go:'branding'} ]},
+
+  /* ---- styling path ---- */
+  styling: { title:'What are we styling?', opts:[
+      {t:'Interior styling', go:'interior'},
+      {t:'The dinner table', go:'table'},
+      {t:'Wardrobe',         go:'wardrobe'} ]},
+  interior: { title:'Whose space is it?', opts:[
+      {t:'My home', go:'capture'},
+      {t:"A client's project", s:"I'm a designer or firm", go:'capture'},
+      {t:'A hotel, restaurant or shop', go:'capture'},
+      {t:'A set for a shoot', go:'capture'} ]},
+  table: { title:"What's the occasion?", opts:[
+      {t:'A dinner party at home', go:'capture'},
+      {t:'A wedding or celebration', go:'capture'},
+      {t:'A brand event or launch', go:'capture'},
+      {t:'A shoot', go:'capture'} ]},
+  wardrobe: { title:"What's it for?", opts:[
+      {t:'A closet edit', s:'Keep, cut, restyle', go:'capture'},
+      {t:'A special event', go:'capture'},
+      {t:'A personal shoot', go:'capture'} ]},
+  capture: { title:'Should I capture it?', opts:[
+      {t:'Yes, photos and short film', go:'when'},
+      {t:'Just photos', go:'when'},
+      {t:'No, just the styling', go:'when'} ]},
+
+  /* ---- branding path ---- */
+  branding: { title:'What do you need?', opts:[
+      {t:'Social media', go:'social'},
+      {t:'A logo',       go:'logo'},
+      {t:'Editing',      go:'editing'},
+      {t:'All of the above', go:'all'} ]},
+  social: { title:'Where are you now?', opts:[
+      {t:'Starting from zero', go:'when'},
+      {t:"Posting, but it isn't landing", go:'when'},
+      {t:'I need a monthly content partner', go:'when'} ]},
+  logo: { title:'Where is the brand?', opts:[
+      {t:'Brand new', go:'when'},
+      {t:'Needs a refresh', go:'when'},
+      {t:'I want the full identity', s:'Logo, colour, type', go:'when'} ]},
+  editing: { title:'What are we editing?', opts:[
+      {t:'Photos', go:'when'},
+      {t:'Short-form video', go:'when'},
+      {t:'A brand film', go:'when'} ]},
+  all: { title:'Where is the brand?', opts:[
+      {t:'Launching something new', go:'when'},
+      {t:'Established, needs a new look', go:'when'},
+      {t:'A full relaunch', go:'when'} ]},
+
+  /* ---- shared ending ---- */
+  when: { title:'When do you need it?', opts:[
+      {t:'Within two weeks', go:'form'},
+      {t:'This month or next', go:'form'},
+      {t:'A few months out', go:'form'},
+      {t:'Ongoing', s:'I need someone regularly', go:'form'} ]}
 };
+/* ================================================= */
 
-function score(){
-  let s = 0, c = 0, answered = 0;
-  const answers = [];
-  QS.forEach((q, i) => {
-    const el = form.querySelector(`input[name="${q}"]:checked`);
-    if (!el) return;
-    answered++;
-    s += Number(el.dataset.s || 0);
-    c += Number(el.dataset.c || 0);
-    answers.push(`${i+1}. ${el.value}`);
+const stage = document.getElementById('stage');
+const bar = document.getElementById('bar');
+let trail = [];              // [{id, answer}]
+const LEN = {styling:5, branding:4};
+
+function esc(x){ return x.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function progress(n){
+  const path = trail[0] ? (trail[0].answer === 'Styling' ? 'styling' : 'branding') : null;
+  const total = path ? LEN[path] + 1 : 6;
+  bar.style.width = Math.min(100, n / total * 100) + '%';
+}
+
+function show(id){
+  if (id === 'form') return showForm();
+  const q = Q[id], H = q.h || 'h2';
+  stage.innerHTML = `<section class="step on">
+    ${q.kick ? `<p class="kick">${q.kick}</p>` : ''}
+    <${H}>${esc(q.title)}</${H}>
+    ${q.lede ? `<p class="lede">${q.lede}</p>` : ''}
+    <ul class="opts">${q.opts.map((o,i)=>`<li><button data-i="${i}">${esc(o.t)}${o.s?`<small>${esc(o.s)}</small>`:''}</button></li>`).join('')}</ul>
+    ${trail.length ? '<button class="prev" id="prev">&larr; Back</button>' : ''}
+  </section>`;
+  stage.querySelectorAll('.opts button').forEach(b => b.addEventListener('click', () => {
+    const o = q.opts[b.dataset.i];
+    trail.push({id, q:q.title, answer:o.t});
+    show(o.go);
+  }));
+  const p = document.getElementById('prev'); if (p) p.addEventListener('click', back);
+  progress(trail.length);
+  const first = stage.querySelector('.opts button'); if (first && trail.length) first.focus({preventScroll:true});
+}
+
+function back(){ const last = trail.pop(); if (last) show(last.id); }
+
+function summary(){ return trail.slice(1, -1).map(t => t.answer).join(' · '); }
+
+function showForm(){
+  const path = trail[0].answer, when = trail[trail.length-1].answer;
+  stage.innerHTML = `<section class="step on">
+    <p class="kick">Nearly there</p>
+    <h2>Tell me about it.</h2>
+    <div class="picked"><span>${esc(path)}</span><p>${esc(summary())}<br>${esc(when)}</p></div>
+    <form id="f" novalidate>
+      <label>Name<input name="name" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Brand, studio or project<input name="brand"></label>
+      <label>Location<input name="location" placeholder="City"></label>
+      <label class="full">Budget
+        <select name="budget"><option value="">Select one</option><option>Under $1,000</option><option>$1,000 – $2,500</option>
+        <option>$2,500 – $5,000</option><option>$5,000 – $10,000</option><option>$10,000+</option><option>Not sure yet</option></select></label>
+      <label class="full">Anything else<textarea name="message" placeholder="Links, inspiration, dates, the feeling you're after."></textarea></label>
+      <p class="err" id="err" role="alert"></p>
+      <div class="send"><button type="submit" id="go">Send to Sallie</button><a id="mail" href="#">Or email me directly</a></div>
+    </form>
+    <button class="prev" id="prev">&larr; Back</button>
+  </section>`;
+  progress(trail.length);
+  document.getElementById('prev').addEventListener('click', back);
+  const f = document.getElementById('f');
+  const answers = trail.map(t => `${t.q} ${t.answer}`).join('\n');
+  const subj = `${path} inquiry: ${summary()}`;
+  document.getElementById('mail').href = `mailto:hello@eaturmood.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(answers + '\n\n')}`;
+  f.querySelector('input').focus({preventScroll:true});
+
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = document.getElementById('err'), go = document.getElementById('go');
+    if (!f.name.value.trim() || !/^\S+@\S+\.\S+$/.test(f.email.value)) { err.textContent = 'Please add your name and a valid email.'; return; }
+    err.textContent = ''; go.disabled = true; go.textContent = 'Sending…';
+    const data = Object.fromEntries(new FormData(f));
+    Object.assign(data, {service: path, selections: summary(), timing: when, answers, _subject: subj, _replyto: data.email});
+    try {
+      const r = await fetch(FORMSPREE, {method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body: JSON.stringify(data)});
+      if (!r.ok) throw 0;
+      bar.style.width = '100%';
+      stage.innerHTML = `<section class="step on done"><p class="kick">Received</p><h2>Got it, ${esc(data.name.split(' ')[0])}.</h2>
+        <p>Your answers are on their way to hello@eaturmood.com. I'll come back to you within two business days.</p>
+        <p><a class="back" href="/index.html">&larr; Back to the tray</a></p></section>`;
+    } catch(_) {
+      go.disabled = false; go.textContent = 'Send to Sallie';
+      err.innerHTML = 'That didn\'t send. Try again, or <a href="' + document.getElementById('mail').href + '">email me directly</a>.';
+    }
   });
-  document.getElementById('count').textContent = answered + ' of 6 answered';
-  if (answered === 6){
-    const key = (s >= c + 2) ? 'styling' : (c >= s + 2) ? 'creative' : 'both';
-    document.getElementById('r-title').textContent = COPY[key][0];
-    document.getElementById('r-body').textContent = COPY[key][1];
-    result.style.display = 'block';
-    document.getElementById('h-service').value = COPY[key][0];
-    document.getElementById('h-answers').value = answers.join('\n');
-    err.style.display = 'none';
-  } else {
-    result.style.display = 'none';
-  }
-  return { answered, answers };
 }
 
-form.addEventListener('change', score);
-
-function validate(){
-  const { answered } = score();
-  const email = document.getElementById('email').value.trim();
-  if (answered < 6){ err.textContent = 'Answer all six questions first.'; err.style.display='block'; return false; }
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-    err.textContent = 'Add an email address so I can reply.'; err.style.display='block'; return false;
-  }
-  err.style.display = 'none';
-  return true;
-}
-
-form.addEventListener('submit', e => {
-  if (!validate()){ e.preventDefault(); return; }
-});
-
-document.getElementById('mailto').addEventListener('click', () => {
-  if (!validate()) return;
-  const g = id => document.getElementById(id).value.trim();
-  const body =
-    `Name: ${g('name')}\nEmail: ${g('email')}\nBrand: ${g('brand')}\n` +
-    `Location: ${g('where')}\nBudget: ${g('budget')}\n\n` +
-    `Recommended: ${document.getElementById('h-service').value}\n\n` +
-    `Answers:\n${document.getElementById('h-answers').value}\n\nNotes:\n${g('notes')}`;
-  window.location.href = 'mailto:hello@eaturmood.com?subject=' +
-    encodeURIComponent('New inquiry from eaturmood.com') + '&body=' + encodeURIComponent(body);
-});
-
-if (location.search.includes('sent=1')){
-  document.getElementById('form-area').style.display = 'none';
-  document.getElementById('sent').style.display = 'block';
-}
+show('start');
 </script>
 </body>
 </html>
