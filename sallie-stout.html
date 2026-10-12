@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sallie Stout — Art Direction &amp; Styling</title>
+<meta name="description" content="Sallie Stout: art direction and styling for interiors and brands. Lead stylist on AD Middle East's Modern Beach Villa feature and 10+ Grace Blu projects. Santa Barbara.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5EFE0;--paper:#FBF7EE;--brown:#2C1A0E;--plum:#3D1A2C;--gold:#C4974A;--line:rgba(44,26,14,.16);--soft:rgba(44,26,14,.72)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--brown);font-family:'Jost',system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.6}
+a{color:inherit}
+img,video{display:block;max-width:100%;height:auto}
+.wrap{width:min(1180px,100%);margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:10;background:rgba(245,239,224,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:58px;gap:16px}
+.top a{text-decoration:none;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.top nav{display:flex;gap:clamp(12px,2.4vw,28px)}
+.top nav a{opacity:.75}.top nav a:hover{opacity:1}
+
+/* hero */
+.hero{padding-block:clamp(56px,10vw,120px) clamp(40px,6vw,64px)}
+.hero h1{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(54px,11vw,128px);line-height:.92;letter-spacing:-.01em;margin:0 0 22px;color:var(--plum)}
+.role{font-size:clamp(15px,1.6vw,17px);font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin:0 0 20px}
+.hero p.lede{font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.8vw,32px);line-height:1.3;max-width:28ch;margin:0 0 34px}
+.open{font-size:17px;font-weight:400;letter-spacing:.02em;margin:0 0 30px;padding-left:14px;border-left:2px solid var(--gold)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;text-decoration:none;font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;padding:15px 24px;border:1px solid var(--brown);transition:background .3s,color .3s}
+.btn.solid{background:var(--plum);border-color:var(--plum);color:var(--cream)}
+.btn:hover,.btn:focus-visible{background:var(--brown);border-color:var(--brown);color:var(--cream);outline:none}
+
+/* credits */
+.credits{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--brown);border-bottom:1px solid var(--line);margin:0 0 clamp(70px,10vw,120px)}
+.credits div{padding:22px 18px 24px 0}
+.credits div+div{padding-left:18px;border-left:1px solid var(--line)}
+.credits b{display:block;font-family:'Bodoni Moda',serif;font-weight:500;font-size:20px;line-height:1.2;margin:0 0 6px}
+.credits span{font-size:15px;color:var(--soft);line-height:1.45;display:block}
+
+/* case studies */
+.case{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);padding-bottom:clamp(80px,11vw,140px)}
+.case .text{position:sticky;top:90px;align-self:start}
+.num{font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.case h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(36px,5vw,58px);line-height:1;margin:0 0 12px;color:var(--plum)}
+.meta{font-size:14px;letter-spacing:.06em;color:var(--soft);margin:0 0 28px}
+.case h3{font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;margin:26px 0 10px}
+.case p{margin:0 0 12px}
+.did{list-style:none;margin:0;padding:0}
+.did li{padding:10px 0;border-bottom:1px solid var(--line)}
+.did li:first-child{border-top:1px solid var(--line)}
+.results{display:grid;gap:12px;margin:0}
+.results div{display:flex;gap:14px;align-items:baseline}
+.results b{font-family:'Bodoni Moda',serif;font-weight:500;font-size:28px;line-height:1;min-width:5.4ch;color:var(--plum)}
+.results span{font-size:16px}
+.media{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.media figure{margin:0}
+.media .wide{grid-column:1/-1}
+.media img,.media video{width:100%;background:var(--paper);box-shadow:0 18px 40px -26px rgba(44,26,14,.55)}
+.media video{aspect-ratio:9/16;object-fit:cover}
+figcaption{font-size:14px;color:var(--soft);margin:10px 0 0;line-height:1.45}
+figcaption b{font-weight:500;color:var(--brown)}
+
+/* extras */
+.band{border-top:1px solid var(--brown);padding-block:clamp(48px,7vw,80px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px)}
+.band h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;margin:0;color:var(--plum)}
+.band p{margin:0 0 14px;max-width:60ch}
+.names{font-family:'Bodoni Moda',serif;font-size:clamp(20px,2.4vw,26px);line-height:1.5;margin:0}
+.contact{background:var(--plum);color:var(--cream);padding:clamp(60px,9vw,110px) 0}
+.contact h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,7vw,80px);line-height:1;margin:0 0 20px}
+.contact p{font-size:18px;max-width:46ch;margin:0 0 30px}
+.contact .btn{border-color:var(--cream);color:var(--cream)}
+.contact .btn.solid{background:var(--cream);color:var(--plum)}
+.contact .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--brown)}
+.contact small{display:block;margin-top:34px;font-size:14px;opacity:.8}
+.contact small a{text-underline-offset:4px}
+
+:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+@media(max-width:860px){
+ .credits{grid-template-columns:1fr 1fr}
+ .credits div:nth-child(3){padding-left:0;border-left:0}
+ .credits div:nth-child(n+3){border-top:1px solid var(--line)}
+ .case,.band{grid-template-columns:1fr}
+ .case .text{position:static}
+}
+@media(max-width:520px){
+ .top nav a:not(.keep){display:none}
+ .credits{grid-template-columns:1fr}
+ .credits div,.credits div+div{padding:18px 0;border-left:0}
+ .credits div+div{border-top:1px solid var(--line)}
+ .media{grid-template-columns:1fr 1fr;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="/index.html">&larr; The tray</a>
+    <nav aria-label="Page">
+      <a href="#grace-blu">Grace Blu</a>
+      <a href="#garden-gate">Garden Gate</a>
+      <a href="#eaturmood">EatUrMood</a>
+      <a class="keep" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero wrap">
+  <p class="role">Art direction &amp; styling</p>
+  <h1>Sallie Stout</h1>
+  <p class="open">Open to in-house art direction and styling roles, and to select contract work.</p>
+  <div class="cta">
+    <a class="btn solid" href="mailto:hello@eaturmood.com?subject=Hiring%20inquiry%20%E2%80%94%20Sallie%20Stout">Email me</a>
+    <a class="btn" href="sallie-stout-resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+  </div>
+</section>
+
+<section class="wrap" aria-label="Selected credits">
+  <div class="credits">
+    <div><b>AD Middle East, July 2025</b><span>The Modern Beach Villa: lead stylist, co-directed with photographer Douglas Friedman</span></div>
+    <div><b>Newport Beach Home Tour 2025</b><span>Lead stylist for three homes</span></div>
+    <div><b>Grace Blu Interiors</b><span>2021–2025. Lead stylist on 10+ projects, 2024–2025</span></div>
+    <div><b>The Girl at the Garden Gate</b><span>Brand identity, launch film and campaign, from a blank page</span></div>
+  </div>
+</section>
+
+<!-- ========== CASE 1 ========== -->
+<article class="case wrap" id="grace-blu">
+  <div class="text">
+    <p class="num">Case study one</p>
+    <h2>Grace Blu Interiors</h2>
+    <p class="meta">Luxury interior design studio · Newport Beach · 2021–2025</p>
+    <p>Embedded creative direction for a luxury interior design studio: how its rooms were styled, photographed, published and shown online.</p>
+    <h3>What I did</h3>
+    <ul class="did">
+      <li>Lead stylist on 10+ projects, 2024–2025</li>
+      <li>Managed accessory sourcing, photographers and publication submissions, which led to AD Middle East's Modern Beach Villa feature</li>
+      <li>Co-directed the AD Middle East shoot with photographer Douglas Friedman</li>
+      <li>Lead stylist for three homes on the Newport Beach Home Tour 2025</li>
+      <li>Managed accessory budgets of $50K and up</li>
+      <li>Directed 20+ photo and video productions a year</li>
+      <li>Built the brand board: palette, fabric and finish</li>
+      <li>Refined the brand and curated its photography</li>
+      <li>Shot and edited short-form video for social</li>
+    </ul>
+    <h3>Results</h3>
+    <div class="results">
+      <div><b>AD ME</b><span>Modern Beach Villa feature, July 2025</span></div>
+      <div><b>$50K+</b><span>Accessory budgets managed per project</span></div>
+      <div><b>10K&#8594;30K</b><span>Audience growth</span></div>
+      <div><b>3 homes</b><span>Lead stylist, Newport Beach Home Tour 2025</span></div>
+    </div>
+  </div>
+  <div class="media">
+    <figure class="wide"><img src="work-ad-me.webp" alt="AD Middle East feature: The Modern Beach Villa, photography by Douglas Friedman" loading="lazy" decoding="async" width="1146" height="1150">
+      <figcaption><b>Lead stylist and co-director.</b> AD Middle East, The Modern Beach Villa, July 2025 · Photography Douglas Friedman · Design Grace Blu</figcaption></figure>
+    <figure class="wide"><img src="work-gb-bar.webp" alt="Deep blue and brass home bar with backlit shelving, Newport Beach" loading="lazy" decoding="async" width="1200" height="859">
+      <figcaption><b>Lead stylist.</b> Home bar, Newport Beach · Photography Douglas Friedman · Design Grace Blu</figcaption></figure>
+    <figure class="wide"><img src="work-hometour.webp" alt="Kitchen coffee bar with purple tulips and yellow mugs on the Home and Garden Tour save-the-date" loading="lazy" decoding="async" width="1176" height="1400">
+      <figcaption><b>Lead stylist.</b> Every object in this kitchen, chosen and placed by me. The room became the cover of the Newport Harbor High School Home and Garden Tour save-the-date</figcaption></figure>
+    <figure><video src="pop.mp4" muted loop playsinline preload="metadata" aria-label="Some Like It Pop, short-form edit"></video>
+      <figcaption><b>Shot and edited.</b> Some Like It Pop, a colour-led reveal cut to a beat drop</figcaption></figure>
+    <figure><video src="travertine.mp4" muted loop playsinline preload="metadata" aria-label="Travertine, short-form edit"></video>
+      <figcaption><b>Shot and edited.</b> Travertine, material close-ups shot handheld on set</figcaption></figure>
+    <figure class="wide"><img src="work-gb-living.webp" alt="Living room at golden hour with ocean view and ochre velvet sofa" loading="lazy" decoding="async" width="1200" height="775">
+      <figcaption><b>Lead stylist.</b> Living room at golden hour · Photography Hugo Landa · Design Grace Blu</figcaption></figure>
+    <figure class="wide"><img src="54ad3c572cb4.webp" alt="Grace Blu brand board: magenta and gold palette with fabric swatches" loading="lazy" decoding="async">
+      <figcaption><b>Created.</b> Grace Blu brand board: palette, fabric and finish, set before a room was shot</figcaption></figure>
+  </div>
+</article>
+
+<!-- ========== CASE 2 ========== -->
+<article class="case wrap" id="garden-gate">
+  <div class="text">
+    <p class="num">Case study two</p>
+    <h2>The Girl at the Garden Gate</h2>
+    <p class="meta">Horticulture brand · Morgan Hill, California</p>
+    <p>A brand that didn't exist yet. I built its identity, then directed the film and campaign that launched it.</p>
+    <h3>What I did</h3>
+    <ul class="did">
+      <li>Logo, crest and brand mark</li>
+      <li>Type guide and colour palette</li>
+      <li>Directed, shot and edited the launch film, Beyond the Gate</li>
+      <li>Planned a 40-day launch campaign: a 12-post launch kit and content calendar</li>
+    </ul>
+  </div>
+  <div class="media">
+    <figure class="wide"><img src="work-gg-grid.webp" alt="Girl at the Garden Gate launch grid: crest, portraits, Beyond the Gate cover, Garden Tips and London Finds posts" loading="lazy" decoding="async" width="778" height="1073">
+      <figcaption><b>Identity, art direction and photography.</b> The launch grid: crest, cover art and the first twelve posts</figcaption></figure>
+    <figure><img src="work-gg-gate.webp" alt="Woman in white lace and green boots walking through a white garden gate" loading="lazy" decoding="async" width="861" height="1400">
+      <figcaption><b>Art direction and photography.</b> Through the gate</figcaption></figure>
+    <figure><img src="work-gg-boots.webp" alt="Pink rain boots beside a checkered bucket of zinnias" loading="lazy" decoding="async" width="724" height="1086">
+      <figcaption><b>Styling and photography.</b> Cut zinnias</figcaption></figure>
+    <figure><video src="gate1.mp4" muted loop playsinline preload="metadata" aria-label="Beyond the Gate, launch film"></video>
+      <figcaption><b>Directed, shot and edited.</b> Beyond the Gate, the launch film</figcaption></figure>
+    <figure><video src="gate2.mp4" muted loop playsinline preload="metadata" aria-label="Uncut Stems, short film"></video>
+      <figcaption><b>Shot and edited.</b> Uncut Stems, long-form storytelling for a slower audience</figcaption></figure>
+  </div>
+</article>
+
+<!-- ========== CASE 3 ========== -->
+<article class="case wrap" id="eaturmood">
+  <div class="text">
+    <p class="num">Case study three</p>
+    <h2>EatUrMood</h2>
+    <p class="meta">Self-initiated · Concept, art direction, product styling</p>
+    <p>My own studio, designed as a dinner party. Every page is a dish, and every dish is a skill: styling is the bread and butter, social is the toast, and the menu pairs a flavour with something to buy.</p>
+    <h3>What I did</h3>
+    <ul class="did">
+      <li>Concept and art direction for the whole world, from the silver tray homepage down</li>
+      <li><a href="/products.html">Cravings</a>: six ice cream flavours, each paired with a House of Hackney cushion and a styling board of my own</li>
+      <li>Product styling, copy and the site's visual system</li>
+    </ul>
+  </div>
+  <div class="media">
+    <figure class="wide"><img src="work-eum-tray.webp" alt="EatUrMood homepage: a silver tray holding a coupe, butter, bread, photographs and a matchbook" loading="lazy" decoding="async">
+      <figcaption><b>Concept and art direction.</b> The homepage: a tray where each object opens a service</figcaption></figure>
+    <figure class="wide"><img src="work-eum-pair.webp" alt="A peach ice cream scoop with pansies beside a pink velvet pansy cushion" loading="lazy" decoding="async">
+      <figcaption><b>Concept and styling.</b> Cravings: the Zesty scoop and the pillow it serves</figcaption></figure>
+  </div>
+</article>
+
+<section class="band wrap" aria-labelledby="partners">
+  <h2 id="partners">Partnerships I started</h2>
+  <p class="names">Artemis Deco · Herron House · Culterra · Kosmic Kitty Wines · The Plant Daddies</p>
+</section>
+
+<section class="band wrap" aria-labelledby="before">
+  <h2 id="before">Before this</h2>
+  <div>
+    <p>I studied graphic design at the University of Mississippi, then started as a stylist at Rent the Runway.</p>
+    <p>Then I spent over two years as an Account Manager at Xactly, carrying a quota on SaaS accounts. I made President's Club in 2021, closing $1.2M against an $800K target, and hit 135% of quota in 2022.</p>
+    <p>So I speak brief, budget and deadline as fluently as palette.</p>
+  </div>
+</section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's make something.</h2>
+    <p>Open to art direction and styling roles on in-house teams, and to contract work. Based in Santa Barbara, happy to travel.</p>
+    <div class="cta">
+      <a class="btn solid" href="mailto:hello@eaturmood.com?subject=Hiring%20inquiry%20%E2%80%94%20Sallie%20Stout">hello@eaturmood.com</a>
+      <a class="btn" href="sallie-stout-resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      <a class="btn" href="/inquire.html">Start a project: take the quiz</a>
+    </div>
+    <small>Also: <a href="/styling.html">styling portfolio</a> · <a href="/social.html">video work</a> · <a href="https://instagram.com/sal_stout">@sal_stout</a></small>
+  </div>
+</section>
+
+<script>
+/* videos play only while on screen */
+const vids=[...document.querySelectorAll('video')];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?e.target.play().catch(()=>{}):e.target.pause()}),{threshold:.35});
+  vids.forEach(v=>io.observe(v));
+}
+</script>
+</body>
+</html>

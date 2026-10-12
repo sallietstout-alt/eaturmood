@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Inquire — EatUrMood</title>
-<meta name="description" content="A few quick questions to find the right creative service: styling or branding. EatUrMood, Santa Barbara.">
+<meta name="description" content="Start a project with EatUrMood: photos, film and social content for brands, or styling. A few quick questions. Santa Barbara.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -94,11 +94,11 @@ footer{text-align:center;font-size:12px;letter-spacing:.12em;color:rgba(44,26,14
 const FORMSPREE = 'https://formspree.io/f/mzdnowea';
 
 const Q = {
-  start: { kick:'Creative services', title:'Why are you here?', h:'h1',
+  start: { kick:'Start a project', title:'What are you working on?', h:'h1',
     lede:'A few quick questions, then you can tell me about the project.',
     opts:[
-      {t:'Styling',  s:'Rooms, tables, wardrobes', go:'styling'},
-      {t:'Branding', s:'Social, logo, editing',    go:'branding'} ]},
+      {t:'Brand content', s:'Photos, film, social, editing', go:'branding'},
+      {t:'Styling',       s:'Rooms, tables, wardrobes',      go:'styling'} ]},
 
   /* ---- styling path ---- */
   styling: { title:'What are we styling?', opts:[
@@ -126,10 +126,16 @@ const Q = {
 
   /* ---- branding path ---- */
   branding: { title:'What do you need?', opts:[
-      {t:'Social media', go:'social'},
-      {t:'A logo',       go:'logo'},
-      {t:'Editing',      go:'editing'},
+      {t:'A shoot', s:'Photos and short film', go:'shoot'},
+      {t:'Social content', go:'social'},
+      {t:'Editing',        go:'editing'},
+      {t:'A logo or identity', go:'logo'},
       {t:'All of the above', go:'all'} ]},
+  shoot: { title:'What kind of brand?', opts:[
+      {t:'Hotel or restaurant', go:'when'},
+      {t:'Food or drink',       go:'when'},
+      {t:'Fashion or lifestyle', go:'when'},
+      {t:'Interiors or real estate', go:'when'} ]},
   social: { title:'Where are you now?', opts:[
       {t:'Starting from zero', go:'when'},
       {t:"Posting, but it isn't landing", go:'when'},
